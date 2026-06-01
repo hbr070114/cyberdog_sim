@@ -133,6 +133,39 @@ CENTERLINE_KP = 0.6
 CENTERLINE_KD = 0.15
 STAGE1_GOAL_STEER_WEIGHT = 0.22
 STAGE1_LINE_HOLD_SEC = 0.85
+FORCE_COORD_ONLY = env_int("RACE_FORCE_COORD_ONLY", 1, 0, 1) > 0
+FORCE_COORD_RADIUS = env_float("RACE_FORCE_COORD_RADIUS", 0.035, 0.015, 0.08)
+FORCE_COORD_VX = env_float("RACE_FORCE_COORD_VX", 0.34, 0.08, 0.65)
+FORCE_COORD_VY = env_float("RACE_FORCE_COORD_VY", 0.16, 0.04, 0.35)
+FORCE_COORD_YAW_LIMIT = env_float("RACE_FORCE_COORD_YAW_LIMIT", 0.80, 0.10, 1.60)
+FORCE_COORD_FACE_YAW = env_float("RACE_FORCE_COORD_FACE_YAW", 0.24, 0.08, 0.60)
+FORCE_COORD_FACE_VX = env_float("RACE_FORCE_COORD_FACE_VX", 0.045, 0.0, 0.12)
+FORCE_COORD_SLOW_RADIUS = env_float("RACE_FORCE_COORD_SLOW_RADIUS", 0.42, 0.12, 0.80)
+FORCE_COORD_MIN_DRIVE_VX = env_float("RACE_FORCE_COORD_MIN_DRIVE_VX", 0.018, 0.0, 0.06)
+FORCE_COORD_STAGE1_X_BRAKE_MARGIN = env_float("RACE_FORCE_COORD_STAGE1_X_BRAKE_MARGIN", 0.24, 0.08, 0.36)
+FORCE_COORD_STAGE1_PRETURN_DIST = env_float("RACE_FORCE_COORD_STAGE1_PRETURN_DIST", 0.58, 0.20, 0.90)
+FORCE_COORD_STAGE1_CORNER_MIN_VX = env_float("RACE_FORCE_COORD_STAGE1_CORNER_MIN_VX", 0.055, 0.02, 0.12)
+FORCE_COORD_STAGE1_Y_X_HOLD = env_float("RACE_FORCE_COORD_STAGE1_Y_X_HOLD", 2.78, 2.65, 2.90)
+FORCE_COORD_STAGE1_X_RADIUS = env_float("RACE_FORCE_STAGE1_X_RADIUS", 0.045, 0.02, 0.09)
+FORCE_COORD_STAGE1_X_DRIVE_VX = env_float("RACE_FORCE_STAGE1_X_DRIVE_VX", 0.24, 0.08, 0.38)
+FORCE_COORD_STAGE1_X_SLOW_VX = env_float("RACE_FORCE_STAGE1_X_SLOW_VX", 0.13, 0.06, 0.22)
+FORCE_COORD_STAGE1_Y_DRIVE_VX = env_float("RACE_FORCE_STAGE1_Y_DRIVE_VX", 0.22, 0.06, 0.38)
+FORCE_COORD_STAGE1_Y_SLOW_VX = env_float("RACE_FORCE_STAGE1_Y_SLOW_VX", 0.10, 0.04, 0.22)
+FORCE_COORD_STAGE1_Y_RADIUS = env_float("RACE_FORCE_STAGE1_Y_RADIUS", 0.09, 0.04, 0.16)
+FORCE_COORD_STAGE1_STONE_VY_GAIN = env_float("RACE_FORCE_STAGE1_STONE_VY_GAIN", 0.32, 0.0, 0.60)
+FORCE_COORD_STAGE1_STONE_VY_LIMIT = env_float("RACE_FORCE_STAGE1_STONE_VY_LIMIT", 0.055, 0.0, 0.08)
+FORCE_COORD_LATERAL_GAIN = env_float("RACE_FORCE_COORD_LATERAL_GAIN", 0.18, 0.0, 0.45)
+FORCE_COORD_LATERAL_LIMIT = env_float("RACE_FORCE_COORD_LATERAL_LIMIT", 0.035, 0.0, 0.08)
+FORCE_COORD_LINE_LATERAL_GAIN = env_float("RACE_FORCE_COORD_LINE_LATERAL_GAIN", 0.26, 0.0, 0.80)
+FORCE_COORD_LINE_LATERAL_LIMIT = env_float("RACE_FORCE_COORD_LINE_LATERAL_LIMIT", 0.08, 0.0, 0.18)
+FORCE_COORD_LINE_HIT_LATERAL = env_float("RACE_FORCE_COORD_LINE_HIT_LATERAL", 0.08, 0.03, 0.18)
+FORCE_ROUTE_YAW_GAIN = env_float("RACE_FORCE_ROUTE_YAW_GAIN", 1.20, 0.20, 2.20)
+FORCE_ROUTE_LATERAL_GAIN = env_float("RACE_FORCE_ROUTE_LATERAL_GAIN", 0.42, 0.0, 1.20)
+FORCE_ROUTE_LATERAL_LIMIT = env_float("RACE_FORCE_ROUTE_LATERAL_LIMIT", 0.12, 0.0, 0.30)
+FORCE_ROUTE_SLOW_RADIUS = env_float("RACE_FORCE_ROUTE_SLOW_RADIUS", 0.30, 0.12, 0.80)
+FORCE_ROUTE_MIN_VX = env_float("RACE_FORCE_ROUTE_MIN_VX", 0.08, 0.0, 0.25)
+FORCE_ROUTE_DEFAULT_RADIUS = env_float("RACE_FORCE_ROUTE_RADIUS", 0.14, 0.04, 0.35)
+FORCE_ROUTE_OVERSHOOT_LATERAL = env_float("RACE_FORCE_ROUTE_OVERSHOOT_LATERAL", 0.42, 0.18, 0.80)
 SAFE_VX = env_float("RACE_SAFE_VX", 0.24, 0.03, 0.50)
 SAFE_YAW = env_float("RACE_SAFE_YAW", 0.18, 0.05, 0.45)
 STEP_FLAT = env_float("RACE_STEP_FLAT", 0.1018, 0.04, 0.18)
@@ -176,8 +209,12 @@ STONE_PAIR_SETTLE_VX = env_float("RACE_STONE_PAIR_SETTLE_VX", SAFE_VX, 0.012, 0.
 STONE_PAIR_CENTER_VY_GAIN = env_float("RACE_STONE_PAIR_CENTER_VY_GAIN", 0.032, 0.0, 0.10)
 STONE_PAIR_CENTER_VY_LIMIT = env_float("RACE_STONE_PAIR_CENTER_VY_LIMIT", 0.010, 0.0, 0.030)
 STONE_FRONT_PAIR_WAIT_SEC = env_float("RACE_STONE_FRONT_PAIR_WAIT_SEC", 0.0, 0.0, 1.80)
+if FORCE_COORD_ONLY:
+    STONE_FRONT_PAIR_WAIT_SEC = 0.0
 STONE_FRONT_PAIR_WAIT_VX = env_float("RACE_STONE_FRONT_PAIR_WAIT_VX", 0.024, 0.0, 0.110)
 STONE_FRONT_PAIR_HOLD_SEC = env_float("RACE_STONE_FRONT_PAIR_HOLD_SEC", 0.0, 0.0, 1.00)
+if FORCE_COORD_ONLY:
+    STONE_FRONT_PAIR_HOLD_SEC = 0.0
 STONE_FRONT_PAIR_PULSE_VX = env_float("RACE_STONE_FRONT_PAIR_PULSE_VX", 0.032, 0.0, 0.120)
 STONE_FRONT_PAIR_PULSE_SEC = env_float("RACE_STONE_FRONT_PAIR_PULSE_SEC", 0.08, 0.04, 0.22)
 STONE_FRONT_PAIR_PULSE_GAP_SEC = env_float("RACE_STONE_FRONT_PAIR_PULSE_GAP_SEC", 0.58, 0.18, 0.95)
@@ -201,15 +238,14 @@ STAGE1_EXIT_X = 2.20
 STAGE1_EXIT_Y = 0.00
 STAGE1_STONE_EXIT_POINT = (2.20, 0.00)
 # STL 测得一二赛段净缺口为 x=2.778..3.378。
-# 不能取几何中心 3.08：原地转向时前脚扫掠会碰到右侧 x=3.378 黄线。
-# 按前脚前伸、半身宽和足端半径留余量后，base_link 转身中心取 x≈2.99。
+# 机身中心锁在 x=2.99，给右侧黄线和前脚扫掠留余量。
 STAGE1_GAP_X = env_float("RACE_STAGE1_GAP_X", 2.99, 2.96, 3.01)
-STAGE1_DIRECT_STAGE2_X = env_float("RACE_STAGE1_DIRECT_STAGE2_X", 2.96, 2.86, 3.06)
-STAGE1_DIRECT_STAGE2_Y = env_float("RACE_STAGE1_DIRECT_STAGE2_Y", 1.30, 1.20, 1.38)
+STAGE1_DIRECT_STAGE2_X = env_float("RACE_STAGE1_DIRECT_STAGE2_X", 2.99, 2.96, 3.01)
+STAGE1_DIRECT_STAGE2_Y = env_float("RACE_STAGE1_DIRECT_STAGE2_Y", 0.92, 0.82, 1.02)
 # 红灰线交叉点在红色 x 轴上，y 必须为 0；到点后只允许转向缺口，不再继续回拉。
 STAGE1_GAP_BELOW_Y = env_float("RACE_STAGE1_GAP_BELOW_Y", 0.00, -0.06, 0.06)
 STAGE1_RED_GRAY_TURN_POINT = (STAGE1_GAP_X, STAGE1_GAP_BELOW_Y)
-STAGE1_STAGE2_TURN_Y = env_float("RACE_STAGE1_STAGE2_TURN_Y", 1.30, 1.20, 1.38)
+STAGE1_STAGE2_TURN_Y = env_float("RACE_STAGE1_STAGE2_TURN_Y", 0.92, 0.82, 1.02)
 STAGE1_GAP_POINT = (STAGE1_GAP_X, STAGE1_STAGE2_TURN_Y)
 STAGE1_GAP_BELOW_POINT = (STAGE1_GAP_X, STAGE1_GAP_BELOW_Y)
 STAGE1_GAP_INNER_POINT = (STAGE1_GAP_X, STAGE1_STAGE2_TURN_Y)
@@ -291,14 +327,14 @@ STAGE1_GAP_X_ALIGN_YAW_TOL = env_float("RACE_STAGE1_GAP_X_ALIGN_YAW_TOL", 0.08, 
 STAGE1_GAP_TURN_Y_TOL = env_float("RACE_STAGE1_GAP_TURN_Y_TOL", 0.025, 0.015, 0.08)
 STAGE1_GAP_TURN_VY_GAIN = env_float("RACE_STAGE1_GAP_TURN_VY_GAIN", 0.240, 0.0, 0.40)
 STAGE1_GAP_TURN_VY_LIMIT = env_float("RACE_STAGE1_GAP_TURN_VY_LIMIT", 0.068, 0.0, 0.100)
-STAGE1_GAP_X_SAFE_MAX = env_float("RACE_STAGE1_GAP_X_SAFE_MAX", 3.08, 3.02, 3.16)
-STAGE1_GAP_RECOVER_X = env_float("RACE_STAGE1_GAP_RECOVER_X", 2.92, 2.86, 2.98)
+STAGE1_GAP_X_SAFE_MAX = env_float("RACE_STAGE1_GAP_X_SAFE_MAX", 3.02, 3.00, 3.08)
+STAGE1_GAP_RECOVER_X = env_float("RACE_STAGE1_GAP_RECOVER_X", 2.95, 2.90, 2.99)
 STAGE1_GAP_RECOVER_Y_MAX = env_float("RACE_STAGE1_GAP_RECOVER_Y_MAX", 1.22, 0.90, 1.45)
 STAGE1_GAP_RECOVER_WORLD_VX = env_float("RACE_STAGE1_GAP_RECOVER_WORLD_VX", 0.30, 0.06, 0.42)
 STAGE1_GAP_RECOVER_WORLD_VY = env_float("RACE_STAGE1_GAP_RECOVER_WORLD_VY", 0.12, 0.0, 0.20)
-STAGE1_GAP_HARD_WALL_X = env_float("RACE_STAGE1_GAP_HARD_WALL_X", 3.16, 3.05, 3.24)
-STAGE1_GAP_TURN_X = env_float("RACE_STAGE1_GAP_TURN_X", STAGE1_GAP_X, 2.90, 3.04)
-STAGE1_GAP_TURN_FORCE_X = env_float("RACE_STAGE1_GAP_TURN_FORCE_X", 3.03, 2.96, 3.12)
+STAGE1_GAP_HARD_WALL_X = env_float("RACE_STAGE1_GAP_HARD_WALL_X", 3.06, 3.02, 3.12)
+STAGE1_GAP_TURN_X = env_float("RACE_STAGE1_GAP_TURN_X", STAGE1_GAP_X, 2.96, 3.01)
+STAGE1_GAP_TURN_FORCE_X = env_float("RACE_STAGE1_GAP_TURN_FORCE_X", 3.01, 2.99, 3.06)
 STAGE1_STONE_ALIGN_YAW = env_float("RACE_STAGE1_STONE_ALIGN_YAW", 0.0, -math.pi, math.pi)
 # 石板路默认朝向世界坐标正 x 轴，后续缺口方向与石板路保持 90° 差值。
 STAGE1_GAP_ALIGN_YAW = env_float(
@@ -310,56 +346,65 @@ STAGE1_GAP_ALIGN_YAW = env_float(
 STAGE1_GAP_ALIGN_YAW_TOL = env_float("RACE_STAGE1_GAP_ALIGN_YAW_TOL", 0.12, 0.04, 0.28)
 STAGE1_GAP_STRAIGHT_VX = env_float("RACE_STAGE1_GAP_STRAIGHT_VX", SAFE_VX, 0.018, 0.420)
 STAGE1_STONE_EXIT_CROSS_X = env_float("RACE_STAGE1_STONE_EXIT_CROSS_X", 2.18, 2.05, 2.55)
-STAGE1_GAP_OVERRUN_X = env_float("RACE_STAGE1_GAP_OVERRUN_X", 3.08, 2.98, 3.16)
-STAGE1_GAP_OVERRUN_STAGE2_Y = env_float("RACE_STAGE1_GAP_OVERRUN_STAGE2_Y", STAGE1_STAGE2_TURN_Y, 1.20, 1.38)
+STAGE1_GAP_OVERRUN_X = env_float("RACE_STAGE1_GAP_OVERRUN_X", 3.02, 2.99, 3.08)
+STAGE1_GAP_OVERRUN_STAGE2_Y = env_float("RACE_STAGE1_GAP_OVERRUN_STAGE2_Y", STAGE1_STAGE2_TURN_Y, 0.82, 1.02)
 STAGE1_GAP_RECOVER_YAW_LIMIT = env_float("RACE_STAGE1_GAP_RECOVER_YAW_LIMIT", 0.800, 0.08, 0.90)
 STAGE1_GAP_FAST_YAW_LIMIT = env_float("RACE_STAGE1_GAP_FAST_YAW_LIMIT", 1.60, 0.08, 2.20)
 STAGE1_GATE_Y_MIN = env_float("RACE_STAGE1_GATE_Y_MIN", 0.72, 0.55, 1.05)
 STAGE1_GAP_EARLY_TURN_Y = env_float("RACE_STAGE1_GAP_EARLY_TURN_Y", 0.58, 0.45, 0.86)
 STAGE1_GAP_EARLY_TURN_X_TOL = env_float("RACE_STAGE1_GAP_EARLY_TURN_X_TOL", 0.22, 0.08, 0.38)
-STAGE1_GAP_EXIT_Y = env_float("RACE_STAGE1_GAP_EXIT_Y", STAGE1_STAGE2_TURN_Y, 1.20, 1.45)
-STAGE1_BODY_MID_CLEAR_Y = env_float("RACE_STAGE1_BODY_MID_CLEAR_Y", STAGE1_STAGE2_TURN_Y, 1.20, 1.45)
+STAGE1_GAP_EXIT_Y = env_float("RACE_STAGE1_GAP_EXIT_Y", STAGE1_STAGE2_TURN_Y, 0.82, 1.12)
+STAGE1_BODY_MID_CLEAR_Y = env_float("RACE_STAGE1_BODY_MID_CLEAR_Y", STAGE1_STAGE2_TURN_Y, 0.82, 1.12)
 STAGE1_BODY_MID_CLEAR_X_TOL = env_float("RACE_STAGE1_BODY_MID_CLEAR_X_TOL", 0.045, 0.03, 0.08)
-STAGE1_GAP_PASSED_X = env_float("RACE_STAGE1_GAP_PASSED_X", 2.96, 2.90, 3.04)
-STAGE1_GAP_PASSED_Y = env_float("RACE_STAGE1_GAP_PASSED_Y", STAGE1_STAGE2_TURN_Y, 1.20, 1.45)
-STAGE1_GAP_PASSED_X_MAX = env_float("RACE_STAGE1_GAP_PASSED_X_MAX", 3.02, 3.00, 3.06)
-STAGE1_REAR_CLEAR_Y = env_float("RACE_STAGE1_REAR_CLEAR_Y", STAGE1_STAGE2_TURN_Y, 1.20, 1.45)
-STAGE1_REAR_CLEAR_X_MIN = env_float("RACE_STAGE1_REAR_CLEAR_X_MIN", 2.86, 2.60, 3.10)
-STAGE1_REAR_CLEAR_X_MAX = env_float("RACE_STAGE1_REAR_CLEAR_X_MAX", 3.02, 3.00, 3.08)
+STAGE1_GAP_PASSED_X = env_float("RACE_STAGE1_GAP_PASSED_X", 2.99, 2.96, 3.04)
+STAGE1_GAP_PASSED_Y = env_float("RACE_STAGE1_GAP_PASSED_Y", STAGE1_STAGE2_TURN_Y, 0.82, 1.12)
+STAGE1_GAP_PASSED_X_MAX = env_float("RACE_STAGE1_GAP_PASSED_X_MAX", 3.03, 3.00, 3.08)
+STAGE1_REAR_CLEAR_Y = env_float("RACE_STAGE1_REAR_CLEAR_Y", STAGE1_STAGE2_TURN_Y, 0.82, 1.12)
+STAGE1_REAR_CLEAR_X_MIN = env_float("RACE_STAGE1_REAR_CLEAR_X_MIN", 2.91, 2.75, 3.00)
+STAGE1_REAR_CLEAR_X_MAX = env_float("RACE_STAGE1_REAR_CLEAR_X_MAX", 3.03, 3.00, 3.08)
 STAGE1_ENTRY_RADIUS = 0.36
 STAGE1_TIMEOUT_FORCE_EXIT_X = 2.55
 STAGE2_ENTRY_POINT = STAGE1_GAP_INNER_POINT
-# 第二赛段出口在寻珠区左上角，越过虚线后才进入 S 弯；原点位在 S 弯中段，切段过晚。
-STAGE2_EXIT_POINT = (-0.18, 4.58)
-STAGE2_EXIT_PATH_POINTS = [
-    ("第二赛段左上缺口前", (-0.14, 3.98), 0.28),
-    ("第二赛段左上缺口内", (-0.20, 4.34), 0.34),
-    ("第二赛段左上出口", STAGE2_EXIT_POINT, 0.42),
+STAGE1_FORCE_COORD_POINTS = [
+    ("红灰线交叉坐标", STAGE1_GAP_BELOW_POINT),
+    ("第二赛段入口坐标", STAGE1_GAP_POINT),
 ]
-STAGE2_TO_STAGE3_GATE_X_MIN = env_float("RACE_STAGE2_TO_STAGE3_GATE_X_MIN", -0.56, -0.75, -0.30)
-STAGE2_TO_STAGE3_GATE_X_MAX = env_float("RACE_STAGE2_TO_STAGE3_GATE_X_MAX", 0.18, -0.05, 0.45)
-STAGE2_TO_STAGE3_GATE_Y = env_float("RACE_STAGE2_TO_STAGE3_GATE_Y", 4.46, 4.20, 4.72)
-STAGE3_ENTRY_POINT = (-0.28, 4.72)
-STAGE3_CURVE_ENTRY_POINT = (-0.18, 5.00)
+# 第二赛段出口必须从左上缺口切入 S 弯，避免提前被第三赛段右侧门点拉偏。
+STAGE2_EXIT_POINT = (-0.30, 4.60)
+STAGE2_EXIT_PATH_POINTS = [
+    ("第二赛段左上角缺口", STAGE2_EXIT_POINT, 0.12),
+]
+STAGE2_TO_STAGE3_GATE_X_MIN = env_float("RACE_STAGE2_TO_STAGE3_GATE_X_MIN", -0.42, -0.75, -0.20)
+STAGE2_TO_STAGE3_GATE_X_MAX = env_float("RACE_STAGE2_TO_STAGE3_GATE_X_MAX", -0.18, -0.60, 0.45)
+STAGE2_TO_STAGE3_GATE_Y = env_float("RACE_STAGE2_TO_STAGE3_GATE_Y", 4.60, 4.45, 4.72)
+STAGE3_ENTRY_POINT = (-0.30, 4.75)
+STAGE3_CURVE_ENTRY_POINT = (-0.21, 4.90)
 STAGE3_LANE_LOCK_POINT = (0.38, 5.18)
 # 第三赛段 STL 边界实测在 y≈4.58..6.67。门点必须落在两侧黄线中心，
 # 不能继续追到 y=8.x，否则会从 S 弯踩线出界。
 STAGE3_PATH_POINTS = [
-    ("S弯入口中心", (-0.30, 4.72), 0.34),
-    ("S弯左侧上弯中心", (-0.10, 4.96), 0.32),
-    ("S弯中下段中心", (0.42, 5.18), 0.32),
-    ("S弯右摆入口中心", (1.06, 5.38), 0.34),
-    ("S弯右摆中线", (1.72, 5.62), 0.34),
-    ("S弯右上回正中心", (2.30, 5.92), 0.34),
-    ("S弯出口右下角中心", (2.86, 6.34), 0.36),
-    ("第四赛道右下角入口", (3.02, 6.62), 0.40),
+    ("S弯入口下沿中线", STAGE3_ENTRY_POINT, 0.12),
+    ("S弯入口上弯中线", STAGE3_CURVE_ENTRY_POINT, 0.12),
+    ("S弯左弯中线", (-0.10, 5.05), 0.12),
+    ("S弯左弯出口中线", (0.15, 5.20), 0.12),
+    ("S弯中段下沿中线", (0.74, 5.42), 0.14),
+    ("S弯中段中线", (1.18, 5.50), 0.14),
+    ("S弯中段上沿中线", (1.46, 5.65), 0.14),
+    ("S弯右弯入口中线", (1.78, 5.80), 0.14),
+    ("S弯右弯过渡中线", (2.20, 5.88), 0.14),
+    ("S弯右弯中线", (2.48, 5.95), 0.14),
+    ("S弯右弯上段中线", (2.74, 6.10), 0.14),
+    ("S弯右弯出口中线", (2.82, 6.25), 0.14),
+    ("S弯出口回正中线", (2.90, 6.40), 0.14),
+    ("S弯出口右侧中线", (2.94, 6.55), 0.14),
+    ("S弯出口脱离黄线", (2.96, 6.78), 0.12),
 ]
 STAGE3_EXIT_POINT = STAGE3_PATH_POINTS[-1][1]
 STAGE4_ENTRY_POINT = STAGE3_EXIT_POINT
 STAGE4_ENTRY_PATH_POINTS = [
-    ("第四赛段入口右下角", STAGE4_ENTRY_POINT, 0.42),
-    ("第四赛段右侧通道", (3.02, 7.20), 0.38),
-    ("第四赛段限高杆入口", (2.60, 8.05), 0.42),
+    ("第四赛段入口缺口", STAGE4_ENTRY_POINT, 0.18),
+    ("第四赛段右下衔接点", (3.12, 7.02), 0.18),
+    ("第四赛段右通道底部中心", (3.12, 7.28), 0.18),
 ]
 STAGE4_LOW_BAR_1 = (-0.13, 9.60)
 STAGE4_LOW_BAR_2 = (2.07, 10.58)
@@ -367,18 +412,75 @@ STAGE4_COKE_POINT = (-0.10, 11.10)
 STAGE4_ORANGE_BALL_POINT = (0.95, 11.10)
 STAGE4_FOOTBALL_POINT = (2.10, 10.80)
 STAGE4_OBSTACLE_POINT = (0.97, 8.56)
-STAGE5_BRIDGE_PREJUMP = (3.05, 8.05)
+STAGE4_LOW_BODY_HEIGHT = env_float("RACE_STAGE4_LOW_BODY_H", 0.155, 0.15, 0.18)
+STAGE4_LOW_PITCH_BIAS = env_float("RACE_STAGE4_LOW_PITCH_BIAS", -0.060, -0.12, 0.02)
+STAGE4_LOW_BAR_SPEED = env_float("RACE_STAGE4_LOW_BAR_VX", 0.24, 0.10, 0.32)
+STAGE4_LOW_BAR_STEP = env_float("RACE_STAGE4_LOW_BAR_STEP", 0.025, 0.015, 0.05)
+STAGE4_LOW_BAR_PREP_SEC = env_float("RACE_STAGE4_LOW_BAR_PREP_SEC", 0.80, 0.20, 1.50)
 STAGE5_BRIDGE_ENTRY = (3.12, 7.66)
+STAGE5_BRIDGE_PREJUMP = STAGE5_BRIDGE_ENTRY
 STAGE4_EXIT_PATH_POINTS = [
-    ("第四赛段右侧回撤", (2.38, 10.20), 0.40),
+    ("第四赛段右侧回撤", (2.10, 7.28), 0.22),
     ("第四赛段右下桥前", STAGE5_BRIDGE_PREJUMP, 0.45),
 ]
-# 独木桥模型 y≈7.66~12.16；赛题要求终点前 50cm 跳下。
-STAGE5_BRIDGE_END_Y = 12.16
+# 第五赛段要沿独木桥完整绕行，到 PDF 右侧缺口前约 50cm 处跳入第六赛段。
+STAGE5_BRIDGE_END_Y = 13.35
 STAGE5_JUMP_BEFORE_END = 0.50
-STAGE5_BRIDGE_EXIT_Y = STAGE5_BRIDGE_END_Y - STAGE5_JUMP_BEFORE_END
+STAGE5_BRIDGE_EXIT_Y = STAGE5_BRIDGE_END_Y
 STAGE6_FOOTBALL_POINT = (0.40, 14.70)
-STAGE6_FINISH_POINT = (3.05, 13.35)
+STAGE6_FINISH_POINT = (3.12, 12.90)
+STAGE4_FORCE_ROUTE_POINTS = [
+    ("第四赛段入口缺口", STAGE4_ENTRY_POINT, 0.18),
+    ("第四赛段右下衔接点", (3.12, 7.02), 0.18),
+    ("第四赛段右侧桥前中线", (3.12, 7.28), 0.18),
+    ("第四赛段右通道底部中心", (2.10, 7.28), 0.18),
+    ("第四赛段右通道限高杆提前低身", (2.10, 9.35), 0.10, {"low": True, "prep_low": True, "speed": STAGE4_LOW_BAR_SPEED}),
+    ("第四赛段足球点", STAGE4_FOOTBALL_POINT, 0.14, {"low": True, "speed": STAGE4_LOW_BAR_SPEED}),
+    ("第四赛段足球入门推进点", (2.10, 11.25), 0.16),
+    ("第四赛段足球后退回右通道底部", (2.10, 7.28), 0.16, {"reverse": True}),
+    ("第四赛段中通道底部中心", (0.95, 7.28), 0.18),
+    ("第四赛段中通道绕障左下", (0.48, 8.05), 0.14),
+    ("第四赛段中通道绕障左上", (0.48, 9.10), 0.14),
+    ("第四赛段中通道绕障回中", (0.95, 9.45), 0.14),
+    ("第四赛段橙球点", STAGE4_ORANGE_BALL_POINT, 0.14),
+    ("第四赛段橙球入门推进点", (0.95, 11.32), 0.16),
+    ("第四赛段橙球后退回中通道", (0.95, 9.45), 0.14, {"reverse": True}),
+    ("第四赛段中通道绕障右上", (1.42, 9.10), 0.14),
+    ("第四赛段中通道绕障右下", (1.42, 8.05), 0.14),
+    ("第四赛段中通道底部回正", (0.95, 7.28), 0.18),
+    ("第四赛段左通道底部中心", (-0.10, 7.28), 0.18),
+    ("第四赛段可乐瓶点", STAGE4_COKE_POINT, 0.14),
+    ("第四赛段可乐瓶入门推进点", (-0.10, 11.32), 0.16),
+    ("第四赛段左通道限高杆提前低身", (-0.10, 10.75), 0.10, {"reverse": True, "low": True, "prep_low": True, "speed": STAGE4_LOW_BAR_SPEED}),
+    ("第四赛段可乐瓶后退回左通道底部", (-0.10, 7.28), 0.16, {"reverse": True, "low": True, "speed": STAGE4_LOW_BAR_SPEED}),
+    ("第四赛段中通道底部中心", (0.95, 7.28), 0.18),
+    ("第四赛段右通道底部回桥前", (2.10, 7.28), 0.18),
+    ("第四赛段桥前点", STAGE5_BRIDGE_PREJUMP, 0.22),
+]
+STAGE5_FORCE_ROUTE_POINTS = [
+    ("独木桥入口点", STAGE5_BRIDGE_ENTRY, 0.18),
+    ("独木桥右侧上行中线", (3.12, 9.55), 0.18),
+    ("独木桥右侧上端中线", (3.12, 11.66), 0.18),
+    ("独木桥下横段右端中线", (3.12, 12.45), 0.18),
+    ("独木桥下横段中线", (1.35, 12.45), 0.18),
+    ("独木桥下横段左端中线", (-0.38, 12.45), 0.18),
+    ("独木桥左侧转角中线", (-0.38, 13.20), 0.18),
+    ("独木桥左侧上行中线", (-0.38, 15.38), 0.18),
+    ("独木桥上横段右端中线", (3.12, 15.38), 0.18),
+    ("独木桥右侧下行中线", (3.12, 14.45), 0.18),
+    ("独木桥末端前50cm", (3.12, STAGE5_BRIDGE_EXIT_Y), 0.18),
+    ("独木桥跳下后落点", (1.20, 14.45), 0.22),
+]
+STAGE6_STABILIZE_POINT = (1.20, 14.45)
+STAGE6_AFTER_KICK_POINT = (1.70, 14.05)
+STAGE6_FINISH_APPROACH_POINT = (2.55, 13.45)
+STAGE6_FORCE_ROUTE_POINTS = [
+    ("第六赛段跳下后稳定点", STAGE6_STABILIZE_POINT, 0.24),
+    ("第六赛段足球点", STAGE6_FOOTBALL_POINT, 0.22),
+    ("第六赛段踢球后回中点", STAGE6_AFTER_KICK_POINT, 0.22),
+    ("第六赛段终点前引导点", STAGE6_FINISH_APPROACH_POINT, 0.22),
+    ("第六赛段终点", STAGE6_FINISH_POINT, 0.24),
+]
 MAP_GOAL_RADIUS = 0.45
 
 HSV_YELLOW_LOWER = (16, 60, 80)
@@ -451,10 +553,31 @@ STAGE_NAMES = {
 
 ORANGE_BALL_TOTAL = 4
 
-# 第二赛段直接追四个橙球固定坐标；不要先执行入口 guard 或折线门点。
+# 第二赛段按固定坐标序列行走：先强制到缺口内转正点，再去第一个橙球下方门点。
 STAGE2_FIXED_TARGETS = [
     {
+        "name": "stage2_gap_entry_lock",
+        "kind": "waypoint",
+        "ball": (STAGE1_GAP_X, STAGE1_STAGE2_TURN_Y),
+        "route": [],
+        "strike": (STAGE1_GAP_X, STAGE1_STAGE2_TURN_Y),
+        "coord_hit_radius": 0.04,
+        "route_vx": 0.20,
+        "count": 0,
+    },
+    {
+        "name": "stage2_first_orange_lower_turn",
+        "kind": "waypoint",
+        "ball": (0.8, 0.92),
+        "route": [],
+        "strike": (0.8, 0.92),
+        "coord_hit_radius": 0.08,
+        "route_vx": 0.70,
+        "count": 0,
+    },
+    {
         "name": "map_row4_col2_1area_ball1_2",
+        "kind": "orange",
         "ball": (0.8, 1.34),
         "link": "hanging_ball::1area_ball1_2",
         "route": [],
@@ -469,6 +592,7 @@ STAGE2_FIXED_TARGETS = [
     },
     {
         "name": "map_row3_col3_1area_ball2_3",
+        "kind": "orange",
         "ball": (2.0, 2.18),
         "link": "hanging_ball::1area_ball2_3",
         "route": [],
@@ -481,6 +605,7 @@ STAGE2_FIXED_TARGETS = [
     },
     {
         "name": "map_row2_col4_1area_ball3_4",
+        "kind": "orange",
         "ball": (3.2, 3.02),
         "link": "hanging_ball::1area_ball3_4",
         "route": [],
@@ -492,6 +617,7 @@ STAGE2_FIXED_TARGETS = [
     },
     {
         "name": "map_row1_col1_1area_ball4_1",
+        "kind": "orange",
         "ball": (-0.4, 3.86),
         "link": "hanging_ball2::1area_ball4_1",
         "route": [],
@@ -501,6 +627,15 @@ STAGE2_FIXED_TARGETS = [
         "hit_search_vx": 1.02,
         "hit_vx": 0.075,
     },
+]
+STAGE2_FORCE_ORANGE_RADIUS = env_float("RACE_STAGE2_FORCE_ORANGE_RADIUS", 0.04, 0.02, 0.10)
+STAGE2_FORCE_ROUTE_POINTS = [
+    ("第二赛段第一个橙球下方转弯点", (0.80, 0.92), 0.08, {"speed": 0.24}),
+    ("第二赛段第一个橙球", (0.80, 1.34), STAGE2_FORCE_ORANGE_RADIUS, {"speed": 0.34, "min_vx": 0.22, "no_slow": True, "pass_through": 0.08}),
+    ("第二赛段第二个橙球", (2.00, 2.18), STAGE2_FORCE_ORANGE_RADIUS, {"speed": 0.34, "min_vx": 0.22, "no_slow": True, "pass_through": 0.08}),
+    ("第二赛段第三个橙球", (3.20, 3.02), STAGE2_FORCE_ORANGE_RADIUS, {"speed": 0.24, "min_vx": 0.18, "no_slow": True, "pass_through": 0.04}),
+    ("第二赛段第四个橙球", (-0.40, 3.86), STAGE2_FORCE_ORANGE_RADIUS, {"speed": 0.34, "min_vx": 0.22, "no_slow": True, "pass_through": 0.08}),
+    ("第二赛段左上角出口", STAGE2_EXIT_POINT, 0.12, {"speed": 0.24}),
 ]
 STAGE2_BLUE_BALLS = [
     (-0.4, 1.34), (2.0, 1.34), (3.2, 1.34),
@@ -582,7 +717,7 @@ STAGE2_SIMPLE_MIN_WORLD_SPEED = env_float("RACE_STAGE2_SIMPLE_MIN_WORLD_SPEED", 
 STAGE2_SIMPLE_ARC_YAW = env_float("RACE_STAGE2_SIMPLE_ARC_YAW", 1.35, 0.45, 2.40)
 STAGE2_SIMPLE_STEER_LIMIT = env_float("RACE_STAGE2_SIMPLE_STEER_LIMIT", 1.05, 0.25, 2.80)
 STAGE2_SIMPLE_TURN_STEER_LIMIT = env_float("RACE_STAGE2_SIMPLE_TURN_STEER_LIMIT", 1.35, 0.35, 2.80)
-STAGE2_SIMPLE_PROGRESS_EPS = env_float("RACE_STAGE2_SIMPLE_PROGRESS_EPS", 0.025, 0.005, 0.08)
+STAGE2_SIMPLE_PROGRESS_EPS = env_float("RACE_STAGE2_SIMPLE_PROGRESS_EPS", 0.010 if FORCE_COORD_ONLY else 0.025, 0.005, 0.08)
 STAGE2_SIMPLE_STALL_SEC = env_float("RACE_STAGE2_SIMPLE_STALL_SEC", 1.45, 0.50, 3.00)
 STAGE2_SIMPLE_STALL_VX = env_float("RACE_STAGE2_SIMPLE_STALL_VX", S2_VX, 0.04, 0.60)
 STAGE2_BLUE_AVOID_FORWARD = env_float("RACE_STAGE2_BLUE_AVOID_FORWARD", 0.82, 0.30, 1.30)
@@ -590,7 +725,7 @@ STAGE2_BLUE_AVOID_LATERAL = env_float("RACE_STAGE2_BLUE_AVOID_LATERAL", 0.30, 0.
 STAGE2_BLUE_AVOID_VY = env_float("RACE_STAGE2_BLUE_AVOID_VY", 0.06, 0.02, 0.35)
 STAGE2_BLUE_AVOID_STEER = env_float("RACE_STAGE2_BLUE_AVOID_STEER", 0.18, 0.04, 0.80)
 STAGE2_BOUND_X_MIN = env_float("RACE_STAGE2_BOUND_X_MIN", -0.56, -0.70, -0.20)
-STAGE2_BOUND_X_MAX = env_float("RACE_STAGE2_BOUND_X_MAX", 3.02, 2.80, 3.18)
+STAGE2_BOUND_X_MAX = env_float("RACE_STAGE2_BOUND_X_MAX", 3.16, 2.80, 3.22)
 STAGE2_BOUND_Y_MIN = env_float("RACE_STAGE2_BOUND_Y_MIN", 0.72, 0.50, 1.10)
 STAGE2_BOUND_Y_MAX = env_float("RACE_STAGE2_BOUND_Y_MAX", 4.42, 4.00, 4.70)
 STAGE2_BOUND_MARGIN = env_float("RACE_STAGE2_BOUND_MARGIN", 0.18, 0.08, 0.34)
@@ -1372,6 +1507,7 @@ class RaceController:
         self.stage1_stone_hits = 0
         self.stage1_reached_rockroad = False
         self.stage1_exit_step = 0
+        self.stage1_force_idx = 0
         self.stage1_tail_clear_start = 0.0
         self.stage1_tail_clear_done = False
         self.stage1_edge_jump_state = 0
@@ -1414,6 +1550,11 @@ class RaceController:
         self.stage3_path_idx = 0
         self.stage4_entry_idx = 0
         self.stage4_exit_idx = 0
+        self.stage4_force_idx = 0
+        self.stage4_low_prepare_idx = -1
+        self.stage4_low_prepare_until = 0.0
+        self.stage5_force_idx = 0
+        self.stage6_force_idx = 0
 
         self.current_target = None
         self.target_history = []
@@ -1457,6 +1598,9 @@ class RaceController:
         self.stage2_simple_last_target_idx = -1
         self.stage2_simple_last_dist = 99.0
         self.stage2_simple_last_progress_time = 0.0
+        self.stage2_last_coord_point = None
+        self.stage2_force_route_initialized = False
+        self.stage2_force_route_idx = 0
         self.last_log_times = {}
         self.speech_once_keys = set()
         self.tts_cmd = shutil.which("spd-say") or shutil.which("espeak-ng") or shutil.which("espeak")
@@ -1908,7 +2052,7 @@ class RaceController:
         roll_comp = max(-0.13, min(0.13, -roll * 0.72 - roll_rate * 0.035))
         pitch_comp = max(-0.13, min(0.13, pitch_bias - pitch * 0.55 - pitch_rate * 0.028))
         height = body_h - 0.008 * speed_load
-        height = max(0.17, min(0.30, height))
+        height = max(0.15, min(0.30, height))
         return [roll_comp, pitch_comp, 0.0], [0.0, 0.0, height]
 
     def _step_pair_for_stage(self, step_h):
@@ -2395,6 +2539,7 @@ class RaceController:
         self.stage1_stone_hits = 0
         self.stage1_reached_rockroad = False
         self.stage1_exit_step = 0
+        self.stage1_force_idx = 0
         self.stage1_tail_clear_start = 0.0
         self.stage1_tail_clear_done = False
         self.stage1_edge_jump_state = 0
@@ -2437,6 +2582,11 @@ class RaceController:
         self.stage3_path_idx = 0
         self.stage4_entry_idx = 0
         self.stage4_exit_idx = 0
+        self.stage4_force_idx = 0
+        self.stage4_low_prepare_idx = -1
+        self.stage4_low_prepare_until = 0.0
+        self.stage5_force_idx = 0
+        self.stage6_force_idx = 0
         self.target_history.clear()
         self.local_target_point = {'target_x': 0.0, 'target_y': -0.3, 'type': 'none', 'conf': 0.0, 'cm_offset': 0.0}
         self.relocating = False
@@ -2472,6 +2622,12 @@ class RaceController:
         self.stage2_simple_last_target_idx = -1
         self.stage2_simple_last_dist = 99.0
         self.stage2_simple_last_progress_time = 0.0
+        self.stage2_force_route_initialized = False
+        self.stage2_force_route_idx = 0
+        if FORCE_COORD_ONLY and self.stage2_target_idx > 0:
+            self.stage2_last_coord_point = self._stage2_aim_point(self.stage2_targets[self.stage2_target_idx - 1])
+        else:
+            self.stage2_last_coord_point = None
         self.last_log_times.clear()
 
     def _time_in_phase(self):
@@ -2742,6 +2898,7 @@ class RaceController:
             self.stage1_stone_hits = 0
             self.stage1_reached_rockroad = False
             self.stage1_exit_step = 0
+            self.stage1_force_idx = 0
             self.stage1_tail_clear_start = 0.0
             self.stage1_tail_clear_done = False
             self.stage1_edge_jump_state = 0
@@ -2755,6 +2912,11 @@ class RaceController:
             self.stage1_edge_jump_start_x = None
             self.stage_phase = 1
             self.phase_start = time.time()
+            if FORCE_COORD_ONLY:
+                self.stage1_edge_jump_state = 3
+                self.stage1_reached_rockroad = True
+                self.log("强制坐标模式：第一赛段不触发 Jump3D，不做恢复等待，直接连续高抬腿前往红灰线坐标")
+                return self._run_stage1_force_coord_only()
             self.log("站立后直接触发 Jump3D 前向小跳上石板")
             self.send_cmd(MODE_JUMP3D, STONE_EDGE_JUMP_GAIT, duration=900)
             self.stage1_edge_jump_state = 1
@@ -2766,6 +2928,11 @@ class RaceController:
             self.stage1_edge_jump_force_reset_time = 0.0
             self.stage1_reached_rockroad = True
             return
+
+        if FORCE_COORD_ONLY:
+            self.stage1_edge_jump_state = max(self.stage1_edge_jump_state, 3)
+            self.stage1_reached_rockroad = True
+            return self._run_stage1_force_coord_only()
 
         roll = sensor_node.imu_roll
         pitch = sensor_node.imu_pitch
@@ -2972,6 +3139,21 @@ class RaceController:
             )
 
         if pre_jump_window:
+            if FORCE_COORD_ONLY:
+                self.log(
+                    f"强制坐标模式：石板前沿不等待对齐，直接触发 Jump3D 小跳 "
+                    f"odom=({ox:.2f},{oy:.2f}) yaw_err={stone_yaw_err:.2f}"
+                )
+                self.send_cmd(MODE_JUMP3D, STONE_EDGE_JUMP_GAIT, duration=900)
+                self.stage1_edge_jump_state = 1
+                self.stage1_edge_jump_issued = True
+                self.stage1_edge_jump_time = time.time()
+                self.stage1_edge_jump_stand_until = self.stage1_edge_jump_time + STONE_EDGE_JUMP_STAND_SEC
+                self.stage1_edge_jump_resume_sent = False
+                self.stage1_edge_jump_force_reset_sent = False
+                self.stage1_edge_jump_force_reset_time = 0.0
+                self.stage1_reached_rockroad = True
+                return
             pre_jump_elapsed = 0.0
             if self.stage1_edge_prejump_time > 0.0:
                 pre_jump_elapsed = time.time() - self.stage1_edge_prejump_time
@@ -3056,6 +3238,7 @@ class RaceController:
         if self.stage1_edge_jump_state == 1:
             now = time.time()
             jump_elapsed = now - self.stage1_edge_jump_time
+            min_jump_recovery_sec = 0.0 if FORCE_COORD_ONLY else JUMP_RECOVERY_MIN_SEC
             if sensor_node.odom_got and ox > STONE_EDGE_JUMP_DONE_X:
                 self.stage1_edge_jump_state = 2
                 self.stage1_edge_jump_resume_time = now
@@ -3066,7 +3249,7 @@ class RaceController:
                 self.stage1_edge_jump_force_reset_time = 0.0
                 self.stage1_reached_rockroad = True
                 self.log(f"Jump3D 前向小跳位移完成，开始恢复接管 odom=({ox:.2f},{oy:.2f})")
-            elif jump_elapsed < JUMP_RECOVERY_MIN_SEC:
+            elif jump_elapsed < min_jump_recovery_sec:
                 self.log_throttle(
                     "stage1_edge_jump_wait",
                     0.35,
@@ -3090,7 +3273,7 @@ class RaceController:
             now = time.time()
             if not self.stage1_edge_jump_resume_sent:
                 elapsed = now - self.stage1_edge_jump_time
-                min_recover_sec = JUMP_RECOVERY_MIN_SEC
+                min_recover_sec = 0.0 if FORCE_COORD_ONLY else JUMP_RECOVERY_MIN_SEC
                 if elapsed < min_recover_sec:
                     self.log_throttle(
                         "stage1_edge_jump_recover_min",
@@ -3099,7 +3282,8 @@ class RaceController:
                     )
                     return
                 self.stage1_edge_jump_resume_sent = True
-                self.stage1_edge_jump_handoff_until = now + max(JUMP_HANDOFF_SEC, 0.80)
+                handoff_sec = 0.0 if FORCE_COORD_ONLY else max(JUMP_HANDOFF_SEC, 0.80)
+                self.stage1_edge_jump_handoff_until = now + handoff_sec
                 self.stage1_edge_jump_resume_time = now
                 self.log("石板入口前向小跳落地后不收腿，直接正向Locomotion接管继续前进")
             if now < self.stage1_edge_jump_handoff_until:
@@ -3122,6 +3306,9 @@ class RaceController:
                 ox >= STONE_EDGE_JUMP_DRIVE_DONE_X and
                 drive_elapsed >= STONE_EDGE_JUMP_DRIVE_SEC
             )
+            if FORCE_COORD_ONLY:
+                self.stage1_edge_jump_state = 3
+                return self._run_stage1_force_coord_only()
             if drive_elapsed < STONE_EDGE_JUMP_DRIVE_SEC and not drive_done:
                 drive_yaw = 0.0
                 drive_vy = 0.0
@@ -3333,36 +3520,31 @@ class RaceController:
                     f"身体中心已到红灰线交叉点锁定区，停止继续前冲，立刻转向缺口 "
                     f"odom=({ox:.2f},{oy:.2f}) target=({STAGE1_GAP_X:.2f},{STAGE1_GAP_BELOW_Y:.2f})"
                 )
+                self._send_stage1_forced_world_target(
+                    STAGE1_GAP_X,
+                    STAGE1_GAP_BELOW_Y,
+                    ox,
+                    oy,
+                    oyaw,
+                    "stage1_red_gray_lock",
+                    x_tol=STAGE1_RED_GRAY_LOCK_X_TOL,
+                    y_tol=STAGE1_RED_GRAY_LOCK_Y_TOL,
+                    max_world_vx=0.0,
+                    max_world_vy=0.04,
+                )
                 return
             if tail_clear_active:
-                clear_elapsed = time.time() - self.stage1_tail_clear_start
-                world_x_err = STAGE1_GAP_X - ox
-                world_y_err = STAGE1_GAP_BELOW_Y - oy
-                world_vx = max(0.0, min(0.22, world_x_err * 0.95))
-                world_vy = max(-0.10, min(0.10, world_y_err * 0.70))
-                base_vx, base_vy = self._world_to_body_velocity(world_vx, world_vy, oyaw)
-                base_vx = max(0.0, min(STAGE1_TAIL_CLEAR_VX, base_vx))
-                base_vy = max(-0.09, min(0.09, base_vy))
-                base_step = STONE_CLIMB_STEP_HEIGHT
-                stage1_gait = STAGE1_GAIT_HIGH_STEP
-                stage1_suppress_min_progress = True
-                self.log_throttle(
-                    "stage1_tail_clear",
-                    0.4,
-                    f"石板下台阶清尾：不再直冲右黄线，直接追红灰线交叉点 "
-                    f"odom=({ox:.2f},{oy:.2f}) elapsed={clear_elapsed:.2f} "
-                    f"target=({STAGE1_GAP_X:.2f},{STAGE1_GAP_BELOW_Y:.2f}) "
-                    f"world_err=({world_x_err:.2f},{world_y_err:.2f}) "
-                    f"cmd=({base_vx:.3f},{base_vy:.3f})"
-                )
-                self.apply_stabilized_locomotion(
-                    base_vx, base_vy, 0.0,
-                    gait=stage1_gait,
-                    step_h=base_step,
-                    sensor=sensor_node,
-                    body_h=STONE_BODY_HEIGHT,
-                    stepup_active=stepup_zone,
-                    suppress_min_progress=True,
+                self._send_stage1_forced_world_target(
+                    STAGE1_GAP_X,
+                    STAGE1_GAP_BELOW_Y,
+                    ox,
+                    oy,
+                    oyaw,
+                    "stage1_tail_clear_force",
+                    x_tol=STAGE1_GAP_X_ALIGN_TOL,
+                    y_tol=STAGE1_GAP_TURN_Y_TOL,
+                    max_world_vx=0.040,
+                    max_world_vy=0.070,
                 )
                 self._check_stuck()
                 return
@@ -3491,17 +3673,25 @@ class RaceController:
                     return
                 else:
                     if sensor_node.odom_got:
-                        world_x_err = STAGE1_GAP_X - ox
-                        world_y_err = STAGE1_GAP_BELOW_Y - oy
-                        world_vx = max(0.0, min(0.06, world_x_err * 0.85))
-                        world_vy = max(-0.04, min(0.18, world_y_err * 0.70))
-                        base_vx, base_vy = self._world_to_body_velocity(world_vx, world_vy, oyaw)
-                        base_vx = max(0.0, min(STAGE1_GAP_CRAWL_VX, base_vx))
-                        base_vy = max(-STAGE1_GAP_TURN_VY_LIMIT, min(STAGE1_GAP_TURN_VY_LIMIT, base_vy))
-                        stage1_suppress_min_progress = True
+                        locked = self._send_stage1_forced_world_target(
+                            STAGE1_GAP_X,
+                            STAGE1_GAP_BELOW_Y,
+                            ox,
+                            oy,
+                            oyaw,
+                            "stage1_gap_below_force",
+                            x_tol=STAGE1_GAP_X_ALIGN_TOL,
+                            y_tol=STAGE1_GAP_TURN_Y_TOL,
+                            max_world_vx=0.040,
+                            max_world_vy=0.070,
+                        )
+                        if locked:
+                            return
+                        self._check_stuck()
+                        return
                     else:
                         base_vx = STAGE1_GAP_CRAWL_VX
-                    final_vyaw = max(-0.06, min(0.06, stone_yaw_err * 0.50))
+                        final_vyaw = max(-0.06, min(0.06, stone_yaw_err * 0.50))
                     self.log_throttle(
                         "stage1_gap_below",
                         0.5,
@@ -3523,20 +3713,44 @@ class RaceController:
                     self.log_throttle(
                         "stage1_gap_align_yaw",
                         0.4,
-                        f"已到红灰线交叉点，先原地对准缺口，禁止未对准时继续顶右黄线 "
+                        f"已到红灰线交叉点，先原地对准缺口，严格到点后再前往下一坐标 "
                         f"yaw_err={yaw_err:.2f} odom=({ox:.2f},{oy:.2f}) "
                         f"x_err={x_err:.2f} vy={base_vy:.2f} yaw={final_vyaw:.2f}"
                     )
                 else:
-                    world_x_err = STAGE1_GAP_X - ox if sensor_node.odom_got else 0.0
-                    world_y_err = STAGE1_STAGE2_TURN_Y - oy if sensor_node.odom_got else 0.0
-                    world_vx = max(-0.050, min(0.050, world_x_err * 0.55))
-                    world_vy = max(-0.080, min(STAGE1_GAP_STRAIGHT_VX, world_y_err * 0.65))
-                    base_vx, base_vy = self._world_to_body_velocity(world_vx, world_vy, oyaw)
-                    base_vx = max(-0.080, min(STAGE1_GAP_STRAIGHT_VX, base_vx))
-                    base_vy = max(-0.050, min(0.050, base_vy))
-                    final_vyaw = max(-0.180, min(0.180, yaw_err * 0.22))
-                    stage1_suppress_min_progress = True
+                    if sensor_node.odom_got:
+                        locked = self._send_stage1_forced_world_target(
+                            STAGE1_GAP_X,
+                            STAGE1_STAGE2_TURN_Y,
+                            ox,
+                            oy,
+                            oyaw,
+                            "stage1_stage2_turn_force",
+                            x_tol=STAGE1_STAGE2_TURN_X_TOL,
+                            y_tol=STAGE1_STAGE2_TURN_Y_TOL,
+                            max_world_vx=0.040,
+                            max_world_vy=0.070,
+                        )
+                        if locked:
+                            self.log(
+                                f"base_link已精确到达进入第二赛段固定转弯点，立刻交给第二赛段坐标导航 "
+                                f"odom=({ox:.2f},{oy:.2f}) target=({STAGE1_GAP_X:.2f},{STAGE1_STAGE2_TURN_Y:.2f}) "
+                                f"err=({x_err:.2f},{turn_y_err:.2f})"
+                            )
+                            self._advance_stage(2)
+                            return
+                        self._check_stuck()
+                        return
+                    else:
+                        world_x_err = STAGE1_GAP_X - ox if sensor_node.odom_got else 0.0
+                        world_y_err = STAGE1_STAGE2_TURN_Y - oy if sensor_node.odom_got else 0.0
+                        world_vx = max(-0.050, min(0.050, world_x_err * 0.55))
+                        world_vy = max(-0.080, min(STAGE1_GAP_STRAIGHT_VX, world_y_err * 0.65))
+                        base_vx, base_vy = self._world_to_body_velocity(world_vx, world_vy, oyaw)
+                        base_vx = max(-0.080, min(STAGE1_GAP_STRAIGHT_VX, base_vx))
+                        base_vy = max(-0.050, min(0.050, base_vy))
+                        final_vyaw = max(-0.180, min(0.180, yaw_err * 0.22))
+                        stage1_suppress_min_progress = True
                     self.log_throttle(
                         "stage1_stage2_turn_lock",
                         0.4,
@@ -3545,15 +3759,6 @@ class RaceController:
                         f"odom=({ox:.2f},{oy:.2f}) err=({world_x_err:.2f},{world_y_err:.2f}) "
                         f"cmd=({base_vx:.2f},{base_vy:.2f},{final_vyaw:.2f})"
                     )
-                if (sensor_node.odom_got and
-                        stage1_at_stage2_turn_point):
-                    self.log(
-                        f"base_link已精确到达进入第二赛段固定转弯点，立刻交给第二赛段坐标导航 "
-                        f"odom=({ox:.2f},{oy:.2f}) target=({STAGE1_GAP_X:.2f},{STAGE1_STAGE2_TURN_Y:.2f}) "
-                        f"err=({x_err:.2f},{turn_y_err:.2f})"
-                    )
-                    self._advance_stage(2)
-                    return
             elif self.stage1_exit_step == 3:
                 if (sensor_node.odom_got and
                         stage1_at_stage2_turn_point and
@@ -3738,6 +3943,8 @@ class RaceController:
             return
         self.stage2_targets = [dict(item) for item in STAGE2_FIXED_TARGETS]
         self.stage2_target_idx = 0
+        if FORCE_COORD_ONLY and self.stage2_targets and self.stage2_targets[0].get("name") == "stage2_gap_entry_lock":
+            self.stage2_target_idx = 1
         self.stage2_route_idx = 0
         self.stage2_exit_idx = 0
         self.orange_hit_count = 0
@@ -3765,7 +3972,35 @@ class RaceController:
             f"{i + 1}:{t['name']}@({t['ball'][0]:.1f},{t['ball'][1]:.2f})"
             for i, t in enumerate(self.stage2_targets)
         )
-        self.log(f"第二赛段启用固定橙球坐标计划: {desc}")
+        self.log(f"第二赛段启用固定坐标序列: {desc}")
+
+    def _run_stage2_force_route(self):
+        if not self.stage2_force_route_initialized:
+            self.stage2_force_route_initialized = True
+            self.grid_initialized = True
+            self.stage2_force_route_idx = 0
+            self.stage2_last_coord_point = STAGE1_GAP_POINT
+            self.orange_hit_count = 0
+            self.relocating = False
+            self.stage2_post_hit_brake_until = 0.0
+            self.log("第二赛段启用最高优先级强制坐标路线，按四个橙球坐标直接连线")
+        route_idx = max(0, min(self.stage2_force_route_idx, len(STAGE2_FORCE_ROUTE_POINTS) - 1))
+        _, _, _, route_options = self._force_route_entry(STAGE2_FORCE_ROUTE_POINTS[route_idx])
+        route_speed = route_options.get("speed", max(STAGE2_SIMPLE_DRIVE_VX, 0.30))
+        active = self._run_force_route(
+            STAGE2_FORCE_ROUTE_POINTS,
+            "stage2_force_route_idx",
+            "第二赛段",
+            next_stage=3,
+            speed=route_speed,
+            gait=STAGE_RUN_GAIT,
+            step_h=MIN_TRAVEL_STEP_HEIGHT,
+            body_h=MOBILE_BODY_HEIGHT,
+            start_anchor=STAGE1_GAP_POINT,
+            allow_lateral=True,
+        )
+        self.orange_hit_count = min(ORANGE_BALL_TOTAL, max(0, self.stage2_force_route_idx - 1))
+        return active
 
     def _stage2_current_target(self):
         if self.stage2_target_idx >= len(self.stage2_targets):
@@ -3776,6 +4011,8 @@ class RaceController:
         return target.get("strike") or target["ball"]
 
     def _stage2_nav_point(self, target):
+        if target.get("kind") == "waypoint":
+            return self._stage2_aim_point(target), "waypoint"
         return self._stage2_aim_point(target), "strike"
 
     def _stage2_force_fixed_aim(self, target):
@@ -3916,20 +4153,466 @@ class RaceController:
         move_vy = -math.sin(oyaw) * world_vx + math.cos(oyaw) * world_vy
         return move_vx, move_vy
 
+    def _body_to_world_velocity(self, move_vx, move_vy, oyaw):
+        world_vx = math.cos(oyaw) * move_vx - math.sin(oyaw) * move_vy
+        world_vy = math.sin(oyaw) * move_vx + math.cos(oyaw) * move_vy
+        return world_vx, world_vy
+
+    def _send_force_route_cmd(self, move_vx, move_vy, vyaw,
+                              gait=STAGE_RUN_GAIT,
+                              step_h=MIN_TRAVEL_STEP_HEIGHT,
+                              body_h=None,
+                              pitch_bias=MOBILE_PITCH_BIAS):
+        step_h = self._step_pair_for_stage(step_h)
+        rpy, pos = self._mobile_pose(sensor_node, move_vx, move_vy, vyaw,
+                                     body_h=body_h, pitch_bias=pitch_bias)
+        self.send_cmd(
+            MODE_LOCOMOTION,
+            gait,
+            vx=move_vx,
+            vy=move_vy,
+            vyaw=vyaw,
+            step_h=step_h,
+            rpy=rpy,
+            pos=pos,
+        )
+
+    def _force_route_entry(self, entry):
+        label, goal, radius = entry[:3]
+        options = entry[3] if len(entry) > 3 and isinstance(entry[3], dict) else {}
+        return label, goal, radius, options
+
+    def _run_force_route(self, route_points, idx_attr, stage_label, next_stage=None,
+                         speed=FORCE_COORD_VX, gait=STAGE_RUN_GAIT,
+                         step_h=MIN_TRAVEL_STEP_HEIGHT, body_h=None,
+                         pitch_bias=MOBILE_PITCH_BIAS, start_anchor=None,
+                         fixed_yaw=None, fixed_yaw_from_idx=None,
+                         allow_lateral=True):
+        if not self._has_global_pose():
+            self.log_throttle(
+                f"{stage_label}_force_no_pose",
+                1.0,
+                f"{stage_label}等待全局位姿，禁止视觉/门点接管"
+            )
+            self._send_force_route_cmd(0.06, 0.0, 0.0, gait=gait,
+                                       step_h=step_h, body_h=body_h,
+                                       pitch_bias=pitch_bias)
+            return True
+
+        ox, oy, oyaw = self._get_odom_pos()
+        idx = max(0, min(getattr(self, idx_attr), len(route_points)))
+        while idx < len(route_points):
+            label, goal, radius, _ = self._force_route_entry(route_points[idx])
+            dist = math.hypot(goal[0] - ox, goal[1] - oy)
+            if dist > radius:
+                break
+            self.log(
+                f"{stage_label}到达坐标 {idx + 1}/{len(route_points)} {label} "
+                f"goal=({goal[0]:.2f},{goal[1]:.2f}) odom=({ox:.2f},{oy:.2f}) "
+                f"dist={dist:.2f}，立即切下一个坐标"
+            )
+            idx += 1
+            setattr(self, idx_attr, idx)
+
+        if idx >= len(route_points):
+            self.log(f"{stage_label}强制坐标路线完成")
+            if next_stage is not None:
+                self._advance_stage(next_stage)
+            return False
+
+        label, goal, radius, options = self._force_route_entry(route_points[idx])
+        reverse = bool(options.get("reverse", False))
+        start = route_points[idx - 1][1] if idx > 0 else (start_anchor or (ox, oy))
+        sx, sy = start
+        gx, gy = goal
+        line_dx = gx - sx
+        line_dy = gy - sy
+        line_len = math.hypot(line_dx, line_dy)
+        if line_len < 1e-6:
+            setattr(self, idx_attr, idx + 1)
+            return True
+
+        ux = line_dx / line_len
+        uy = line_dy / line_len
+        progress_left = (gx - ox) * ux + (gy - oy) * uy
+        lateral_err = (ox - sx) * (-uy) + (oy - sy) * ux
+        passed_goal_plane = (ox - gx) * ux + (oy - gy) * uy >= -0.02
+        goal_dx = gx - ox
+        goal_dy = gy - oy
+        goal_dist = math.hypot(goal_dx, goal_dy)
+        if goal_dist > 1e-6:
+            drive_ux = goal_dx / goal_dist
+            drive_uy = goal_dy / goal_dist
+        else:
+            drive_ux = ux
+            drive_uy = uy
+        if fixed_yaw is not None and (fixed_yaw_from_idx is None or idx >= fixed_yaw_from_idx):
+            target_yaw = fixed_yaw
+            if reverse:
+                target_yaw = self._normalize_angle(target_yaw + math.pi)
+        elif not allow_lateral:
+            target_yaw = math.atan2(drive_uy, drive_ux)
+            if reverse:
+                target_yaw = self._normalize_angle(target_yaw + math.pi)
+        else:
+            target_yaw = math.atan2(uy, ux)
+            if reverse:
+                target_yaw = self._normalize_angle(target_yaw + math.pi)
+        yaw_err = self._normalize_angle(target_yaw - oyaw)
+
+        pass_through = max(0.0, float(options.get("pass_through", 0.0)))
+        if pass_through > 0.0:
+            reached_line = progress_left <= -pass_through
+        else:
+            reached_line = progress_left <= radius or progress_left < -0.02
+        if (reached_line or
+                (passed_goal_plane and abs(lateral_err) > FORCE_ROUTE_OVERSHOOT_LATERAL)):
+            self.log(
+                f"{stage_label}沿两点连线到达 {label} "
+                f"left={progress_left:.2f} lateral={lateral_err:.2f} passed={passed_goal_plane}，立即切点"
+            )
+            setattr(self, idx_attr, idx + 1)
+            return True
+
+        route_slow_radius = options.get("slow_radius", FORCE_ROUTE_SLOW_RADIUS)
+        route_min_vx = options.get("min_vx", FORCE_ROUTE_MIN_VX)
+        if options.get("no_slow", False):
+            slow_scale = 1.0
+        else:
+            slow_scale = max(0.35, min(1.0, abs(progress_left) / route_slow_radius))
+        forward_speed = min(speed, max(route_min_vx, abs(progress_left) * 0.72)) * slow_scale
+        if progress_left < 0.0:
+            forward_speed = -min(speed * 0.35, abs(forward_speed))
+        if abs(yaw_err) > FORCE_COORD_FACE_YAW:
+            forward_speed = min(FORCE_COORD_FACE_VX, abs(progress_left) * 0.20)
+            if progress_left > radius * 1.8:
+                forward_speed = max(FORCE_COORD_MIN_DRIVE_VX, forward_speed)
+            correction = 0.0
+        elif allow_lateral:
+            correction = max(
+                -FORCE_ROUTE_LATERAL_LIMIT,
+                min(FORCE_ROUTE_LATERAL_LIMIT, -lateral_err * FORCE_ROUTE_LATERAL_GAIN)
+            )
+        else:
+            correction = 0.0
+        if allow_lateral:
+            world_vx = ux * forward_speed + (-uy) * correction
+            world_vy = uy * forward_speed + ux * correction
+        else:
+            world_vx = drive_ux * forward_speed
+            world_vy = drive_uy * forward_speed
+        move_vx, move_vy = self._world_to_body_velocity(world_vx, world_vy, oyaw)
+        reverse_limit = speed * (0.62 if reverse else 0.45)
+        min_move_vx = -reverse_limit if reverse else 0.0
+        move_vx = max(min_move_vx, min(speed, move_vx))
+        move_vy = max(-FORCE_ROUTE_LATERAL_LIMIT, min(FORCE_ROUTE_LATERAL_LIMIT, move_vy))
+        if abs(yaw_err) > FORCE_COORD_FACE_YAW or not allow_lateral:
+            move_vy = 0.0
+        vyaw = max(-FORCE_COORD_YAW_LIMIT, min(FORCE_COORD_YAW_LIMIT, yaw_err * FORCE_ROUTE_YAW_GAIN))
+
+        self.log_throttle(
+            f"{stage_label}_force_route",
+            0.25,
+            f"{stage_label}强制两点连线 {idx + 1}/{len(route_points)} {label} "
+            f"from=({sx:.2f},{sy:.2f}) to=({gx:.2f},{gy:.2f}) "
+            f"odom=({ox:.2f},{oy:.2f}) left={progress_left:.2f} "
+            f"lateral={lateral_err:.2f} yaw_err={yaw_err:.2f} "
+            f"reverse={reverse} cmd=({move_vx:.2f},{move_vy:.2f},{vyaw:.2f})"
+        )
+        self._send_force_route_cmd(move_vx, move_vy, vyaw, gait=gait,
+                                   step_h=step_h, body_h=body_h,
+                                   pitch_bias=pitch_bias)
+        return True
+
+    def _send_force_coord_velocity(self, target_x, target_y, label,
+                                   vx_limit=FORCE_COORD_VX,
+                                   vy_limit=FORCE_COORD_VY):
+        if not self._has_global_pose():
+            self.log_throttle(
+                f"{label}_no_pose",
+                1.0,
+                f"强制坐标模式等待全局位姿，目标=({target_x:.2f},{target_y:.2f})"
+            )
+            if self.stage == 1:
+                self.send_cmd(
+                    MODE_LOCOMOTION,
+                    STAGE1_GAIT_HIGH_STEP,
+                    vx=min(FORCE_COORD_VX, STONE_APPROACH_VX),
+                    vy=0.0,
+                    vyaw=0.0,
+                    step_h=(STONE_CLIMB_STEP_HEIGHT, STONE_CLIMB_STEP_HEIGHT_REAR),
+                    rpy=[0.0, STONE_CLIMB_PITCH_BIAS, 0.0],
+                    pos=[0.0, 0.0, STONE_BODY_HEIGHT],
+                )
+            else:
+                self.apply_locomotion(
+                    0.08,
+                    0.0,
+                    0.0,
+                    gait=STAGE_RUN_GAIT,
+                    step_h=MIN_TRAVEL_STEP_HEIGHT,
+                    sensor=sensor_node,
+                    boundary_check=False,
+                )
+            return
+        ox, oy, oyaw = self._get_odom_pos()
+        dx = target_x - ox
+        dy = target_y - oy
+        dist = math.hypot(dx, dy)
+        yaw_err = self._normalize_angle(math.atan2(dy, dx) - oyaw) if dist > 1e-6 else 0.0
+        if abs(yaw_err) > FORCE_COORD_FACE_YAW:
+            move_vx = min(FORCE_COORD_FACE_VX, max(FORCE_COORD_MIN_DRIVE_VX, dist * 0.08))
+            move_vy = 0.0
+            vyaw = max(-FORCE_COORD_YAW_LIMIT, min(FORCE_COORD_YAW_LIMIT, yaw_err * 1.35))
+            mode = "face_drive"
+        else:
+            slow_scale = max(0.0, min(1.0, dist / FORCE_COORD_SLOW_RADIUS))
+            move_vx = min(vx_limit * slow_scale, dist * 0.75)
+            if dist > FORCE_COORD_RADIUS * 1.8:
+                move_vx = max(FORCE_COORD_MIN_DRIVE_VX, move_vx)
+            move_vy = max(
+                -FORCE_COORD_LATERAL_LIMIT,
+                min(FORCE_COORD_LATERAL_LIMIT, math.sin(yaw_err) * dist * FORCE_COORD_LATERAL_GAIN)
+            )
+            vyaw = max(-FORCE_COORD_YAW_LIMIT, min(FORCE_COORD_YAW_LIMIT, yaw_err * 0.55))
+            mode = "drive"
+        self.log_throttle(
+            label,
+            0.50,
+            f"强制坐标头向优先 target=({target_x:.2f},{target_y:.2f}) "
+            f"odom=({ox:.2f},{oy:.2f}) dist={dist:.2f} yaw_err={yaw_err:.2f} "
+            f"mode={mode} cmd=({move_vx:.2f},{move_vy:.2f},{vyaw:.2f})"
+        )
+        if self.stage == 1:
+            self.send_cmd(
+                MODE_LOCOMOTION,
+                STAGE1_GAIT_HIGH_STEP,
+                vx=move_vx,
+                vy=move_vy,
+                vyaw=vyaw,
+                step_h=(STONE_CLIMB_STEP_HEIGHT, STONE_CLIMB_STEP_HEIGHT_REAR),
+                rpy=[0.0, STONE_CLIMB_PITCH_BIAS, 0.0],
+                pos=[0.0, 0.0, STONE_BODY_HEIGHT],
+            )
+        else:
+            self.apply_locomotion(
+                move_vx,
+                move_vy,
+                vyaw,
+                gait=STAGE_RUN_GAIT,
+                step_h=MIN_TRAVEL_STEP_HEIGHT,
+                sensor=sensor_node,
+                boundary_check=False,
+            )
+
+    def _run_stage1_force_coord_only(self):
+        if not self._has_global_pose():
+            self._send_force_coord_velocity(
+                STAGE1_FORCE_COORD_POINTS[self.stage1_force_idx][1][0],
+                STAGE1_FORCE_COORD_POINTS[self.stage1_force_idx][1][1],
+                "stage1_force_coord"
+            )
+            return True
+
+        ox, oy, _ = self._get_odom_pos()
+        if self.stage1_force_idx == 0:
+            target_x, target_y = STAGE1_FORCE_COORD_POINTS[0][1]
+            x_err = target_x - ox
+            y_err = target_y - oy
+            if x_err > FORCE_COORD_STAGE1_X_RADIUS:
+                move_vx = FORCE_COORD_STAGE1_X_DRIVE_VX if x_err > 0.22 else FORCE_COORD_STAGE1_X_SLOW_VX
+                move_vy = max(
+                    -FORCE_COORD_STAGE1_STONE_VY_LIMIT,
+                    min(FORCE_COORD_STAGE1_STONE_VY_LIMIT, y_err * FORCE_COORD_STAGE1_STONE_VY_GAIN)
+                )
+                _, _, oyaw = self._get_odom_pos()
+                yaw_err = self._normalize_angle(STAGE1_STONE_ALIGN_YAW - oyaw)
+                vyaw = max(-0.10, min(0.10, yaw_err * 0.25))
+                self.log_throttle(
+                    "stage1_force_continuous_x",
+                    0.25,
+                    f"第一赛段连续直走到红灰线坐标，禁止提前切第二点 target=({target_x:.2f},{target_y:.2f}) "
+                    f"odom=({ox:.2f},{oy:.2f}) x_err={x_err:.2f} y_err={y_err:.2f} "
+                    f"cmd=({move_vx:.2f},{move_vy:.2f},{vyaw:.2f})"
+                )
+                self.send_cmd(
+                    MODE_LOCOMOTION,
+                    STAGE1_GAIT_HIGH_STEP,
+                    vx=move_vx,
+                    vy=move_vy,
+                    vyaw=vyaw,
+                    step_h=(STONE_CLIMB_STEP_HEIGHT, STONE_CLIMB_STEP_HEIGHT_REAR),
+                    rpy=[0.0, STONE_CLIMB_PITCH_BIAS, 0.0],
+                    pos=[0.0, 0.0, STONE_BODY_HEIGHT],
+                )
+                return True
+            self.log(
+                f"第一赛段已到红灰线坐标附近，立即切第二坐标 "
+                f"odom=({ox:.2f},{oy:.2f}) target=({target_x:.2f},{target_y:.2f}) x_err={x_err:.2f}"
+            )
+            self.stage1_force_idx = 1
+
+        if self.stage1_force_idx == 1:
+            _, start_point = STAGE1_FORCE_COORD_POINTS[0]
+            _, point = STAGE1_FORCE_COORD_POINTS[1]
+            _, _, oyaw = self._get_odom_pos()
+            x_err = STAGE1_GAP_X - ox
+            y_left = point[1] - oy
+            target_yaw = math.atan2(point[1] - start_point[1], point[0] - start_point[0])
+            yaw_err = self._normalize_angle(target_yaw - oyaw)
+            line_dx = point[0] - start_point[0]
+            line_dy = point[1] - start_point[1]
+            line_len = max(1e-6, math.hypot(line_dx, line_dy))
+            line_ux = line_dx / line_len
+            line_uy = line_dy / line_len
+            lateral_err = (ox - start_point[0]) * (-line_uy) + (oy - start_point[1]) * line_ux
+            progress_left = (point[0] - ox) * line_ux + (point[1] - oy) * line_uy
+            reached_line_goal = (
+                y_left <= FORCE_COORD_STAGE1_Y_RADIUS and
+                abs(x_err) <= FORCE_COORD_LINE_HIT_LATERAL
+            )
+            if not reached_line_goal:
+                vyaw = max(-0.80, min(0.80, yaw_err * 1.05))
+                if abs(yaw_err) > FORCE_COORD_FACE_YAW:
+                    world_vx = 0.0
+                    world_vy = 0.0
+                    move_vx = 0.0
+                    move_vy = 0.0
+                else:
+                    world_vx = max(
+                        -FORCE_COORD_LATERAL_LIMIT,
+                        min(FORCE_COORD_LATERAL_LIMIT, x_err * 0.22)
+                    )
+                    y_speed = FORCE_COORD_STAGE1_Y_DRIVE_VX
+                    if y_left < 0.22:
+                        y_speed = FORCE_COORD_STAGE1_Y_SLOW_VX
+                    world_vy = max(FORCE_COORD_STAGE1_Y_SLOW_VX, min(FORCE_COORD_STAGE1_Y_DRIVE_VX, y_speed))
+                    if y_left < 0.0:
+                        world_vy = 0.0
+                    move_vx, move_vy = self._world_to_body_velocity(world_vx, world_vy, oyaw)
+                    move_vx = max(0.0, min(FORCE_COORD_STAGE1_Y_DRIVE_VX, move_vx))
+                    move_vy = max(-0.045, min(0.045, move_vy))
+                    if move_vx < 0.070 and y_left > FORCE_COORD_STAGE1_Y_RADIUS:
+                        move_vx = 0.070
+                self.log_throttle(
+                    "stage1_force_line_segment",
+                    0.25,
+                    f"第一赛段头朝连线进缺口，未对准时禁止横走 "
+                    f"from=({start_point[0]:.2f},{start_point[1]:.2f}) "
+                    f"to=({point[0]:.2f},{point[1]:.2f}) odom=({ox:.2f},{oy:.2f}) "
+                    f"y_left={y_left:.2f} x_err={x_err:.2f} lateral={lateral_err:.2f} yaw_err={yaw_err:.2f} "
+                    f"world_v=({world_vx:.2f},{world_vy:.2f}) cmd=({move_vx:.2f},{move_vy:.2f},{vyaw:.2f})"
+                )
+                self.send_cmd(
+                    MODE_LOCOMOTION,
+                    STAGE1_GAIT_HIGH_STEP,
+                    vx=move_vx,
+                    vy=move_vy,
+                    vyaw=vyaw,
+                    step_h=(STONE_CLIMB_STEP_HEIGHT, STONE_CLIMB_STEP_HEIGHT_REAR),
+                    rpy=[0.0, STONE_CLIMB_PITCH_BIAS, 0.0],
+                    pos=[0.0, 0.0, STONE_BODY_HEIGHT],
+                )
+                return True
+            self.log(
+                f"第一赛段已连续进入第二赛段入口，立即进入第二赛段 "
+                f"odom=({ox:.2f},{oy:.2f}) goal=({point[0]:.2f},{point[1]:.2f}) "
+                f"y_left={y_left:.2f} x_err={x_err:.2f}"
+            )
+            self.stage1_force_idx = len(STAGE1_FORCE_COORD_POINTS)
+
+        while self.stage1_force_idx < len(STAGE1_FORCE_COORD_POINTS):
+            label, point = STAGE1_FORCE_COORD_POINTS[self.stage1_force_idx]
+            dist = math.hypot(point[0] - ox, point[1] - oy)
+            reached = dist <= FORCE_COORD_RADIUS
+            if self.stage1_force_idx == 0:
+                reached = reached or ox >= point[0] - FORCE_COORD_STAGE1_X_BRAKE_MARGIN
+            if not reached:
+                break
+            self.log(
+                f"强制坐标已到达 {label} ({point[0]:.2f},{point[1]:.2f}) "
+                f"odom=({ox:.2f},{oy:.2f}) dist={dist:.2f}，立即切下一个坐标"
+            )
+            self.stage1_force_idx += 1
+
+        if self.stage1_force_idx >= len(STAGE1_FORCE_COORD_POINTS):
+            self.log("第一赛段强制坐标序列完成，立即进入第二赛段坐标序列")
+            self._advance_stage(2)
+            self._run_stage2()
+            return True
+
+        label, point = STAGE1_FORCE_COORD_POINTS[self.stage1_force_idx]
+        self._send_force_coord_velocity(point[0], point[1], f"stage1_force_{self.stage1_force_idx}_{label}")
+        return True
+
+    def _send_stage1_forced_world_target(self, target_x, target_y, ox, oy, oyaw,
+                                         label, x_tol=0.025, y_tol=0.025,
+                                         max_world_vx=0.045, max_world_vy=0.060):
+        x_err = target_x - ox
+        y_err = target_y - oy
+        if abs(x_err) <= x_tol and abs(y_err) <= y_tol:
+            self.send_cmd(
+                MODE_LOCOMOTION,
+                GAIT_TROT_SLOW,
+                vx=0.0,
+                vy=0.0,
+                vyaw=0.0,
+                step_h=(STONE_CLIMB_STEP_HEIGHT, STONE_CLIMB_STEP_HEIGHT_REAR),
+                rpy=[0.0, STONE_CLIMB_PITCH_BIAS, 0.0],
+                pos=[0.0, 0.0, STONE_BODY_HEIGHT],
+            )
+            self.log_throttle(
+                f"{label}_hold",
+                0.20,
+                f"强制坐标到点锁停 {label} target=({target_x:.2f},{target_y:.2f}) "
+                f"odom=({ox:.2f},{oy:.2f}) err=({x_err:.3f},{y_err:.3f})"
+            )
+            return True
+
+        world_vx = max(-max_world_vx, min(max_world_vx, x_err * 0.75))
+        world_vy = max(-max_world_vy, min(max_world_vy, y_err * 0.75))
+        if ox >= STAGE1_GAP_X and world_vx > 0.0:
+            world_vx = 0.0
+        if ox >= STAGE1_GAP_X_SAFE_MAX:
+            world_vx = min(world_vx, -0.018)
+        move_vx, move_vy = self._world_to_body_velocity(world_vx, world_vy, oyaw)
+        move_vx = max(-0.050, min(0.080, move_vx))
+        move_vy = max(-0.080, min(0.080, move_vy))
+        yaw_err = self._normalize_angle(STAGE1_STONE_ALIGN_YAW - oyaw)
+        vyaw = max(-0.080, min(0.080, yaw_err * 0.30))
+        self.log_throttle(
+            label,
+            0.20,
+            f"强制执行坐标点 target=({target_x:.2f},{target_y:.2f}) "
+            f"odom=({ox:.2f},{oy:.2f}) err=({x_err:.3f},{y_err:.3f}) "
+            f"world_v=({world_vx:.3f},{world_vy:.3f}) cmd=({move_vx:.3f},{move_vy:.3f},{vyaw:.3f})"
+        )
+        self.send_cmd(
+            MODE_LOCOMOTION,
+            STAGE1_GAIT_HIGH_STEP,
+            vx=move_vx,
+            vy=move_vy,
+            vyaw=vyaw,
+            step_h=(STONE_CLIMB_STEP_HEIGHT, STONE_CLIMB_STEP_HEIGHT_REAR),
+            rpy=[0.0, STONE_CLIMB_PITCH_BIAS, 0.0],
+            pos=[0.0, 0.0, STONE_BODY_HEIGHT],
+        )
+        return False
+
     def _stage1_apply_gap_hard_wall(self, ox, oy, oyaw, reason):
         world_x_err = STAGE1_GAP_RECOVER_X - ox
         world_y_err = STAGE1_GAP_BELOW_Y - oy
-        world_vx = 0.0
+        world_vx = max(-STAGE1_GAP_RECOVER_WORLD_VX, min(0.0, world_x_err * 0.55))
         world_vy = max(-STAGE1_GAP_RECOVER_WORLD_VY, min(STAGE1_GAP_RECOVER_WORLD_VY, world_y_err * 0.55))
         move_vx, move_vy = self._world_to_body_velocity(world_vx, world_vy, oyaw)
-        move_vx = max(0.0, min(0.06, move_vx))
+        move_vx = max(-0.08, min(0.06, move_vx))
         move_vy = max(-0.16, min(0.16, move_vy))
         yaw_err = self._normalize_angle(STAGE1_GAP_ALIGN_YAW - oyaw)
         vyaw = max(-0.45, min(0.45, yaw_err * 0.32))
         self.log_throttle(
             "stage1_gap_hard_wall",
             0.18,
-            f"第一赛段右黄线硬墙：{reason}，只横向修正，不倒车 "
+            f"第一赛段右黄线硬墙：{reason}，强制回到安全x线内 "
             f"odom=({ox:.2f},{oy:.2f}) wall_x={STAGE1_GAP_HARD_WALL_X:.2f} "
             f"recover=({STAGE1_GAP_RECOVER_X:.2f},{STAGE1_GAP_BELOW_Y:.2f}) "
             f"world_v=({world_vx:.2f},{world_vy:.2f}) cmd=({move_vx:.2f},{move_vy:.2f},{vyaw:.2f})"
@@ -4034,6 +4717,12 @@ class RaceController:
 
     def _stage2_target_reached_reason(self, target, aim_x, aim_y, dist,
                                       orange_center=None, orange_area=0):
+        if target.get("kind") == "waypoint":
+            coord_hit_radius = target.get("coord_hit_radius", STAGE2_SIMPLE_REACHED_RADIUS)
+            if dist <= coord_hit_radius:
+                return f"机身到达固定门点 dist={dist:.2f} <= {coord_hit_radius:.2f}"
+            return None
+
         head_dist, head_yaw_err, head_ok = self._stage2_head_contact_status(aim_x, aim_y)
         coord_hit_radius = target.get("coord_hit_radius", STAGE2_HEAD_HIT_RADIUS)
         head_ok = head_dist <= coord_hit_radius and abs(head_yaw_err) <= STAGE2_HEAD_YAW_TOL
@@ -4062,12 +4751,15 @@ class RaceController:
         return None
 
     def _stage2_advance_target(self, target, reason):
+        is_waypoint = target.get("kind") == "waypoint"
+        completed_point = self._stage2_aim_point(target)
         self.orange_hit_count = min(
             ORANGE_BALL_TOTAL,
             self.orange_hit_count + int(target.get("count", 1))
         )
+        done_text = "到达固定门点" if is_waypoint else "完成固定橙球"
         self.log(
-            f"完成固定橙球 {self.stage2_target_idx + 1}/{len(self.stage2_targets)} "
+            f"{done_text} {self.stage2_target_idx + 1}/{len(self.stage2_targets)} "
             f"{target['name']}，原因={reason}，切下一个坐标"
         )
         self.stage2_target_idx += 1
@@ -4079,10 +4771,11 @@ class RaceController:
         self.stage2_axis_turn_start = 0.0
         self.stage2_axis_force_drive_until = 0.0
         self.stage2_axis_turning_target_idx = -1
-        self.stage2_post_hit_brake_until = time.time() + 0.45
+        self.stage2_post_hit_brake_until = 0.0 if (FORCE_COORD_ONLY or is_waypoint) else time.time() + 0.45
         self.stage2_simple_last_target_idx = -1
         self.stage2_simple_last_dist = 99.0
         self.stage2_simple_last_progress_time = 0.0
+        self.stage2_last_coord_point = completed_point
         self._stage2_reset_target_visual()
         self.stage_phase = FSM_MOVE_TO_TARGET
         self.phase_start = time.time()
@@ -4130,6 +4823,9 @@ class RaceController:
         if self._check_fall():
             return
         self._check_stage_timeout(2)
+        if FORCE_COORD_ONLY:
+            self._run_stage2_force_route()
+            return
 
         ox, oy, oyaw = self._get_odom_pos()
 
@@ -4159,7 +4855,23 @@ class RaceController:
             return
 
         if STAGE2_SIMPLE_COORD_MODE:
+            while target is not None and target.get("kind") == "waypoint":
+                aim_x, aim_y = self._stage2_aim_point(target)
+                dist_now = math.hypot(aim_x - ox, aim_y - oy)
+                radius_now = target.get("coord_hit_radius", STAGE2_SIMPLE_REACHED_RADIUS)
+                if dist_now > radius_now:
+                    break
+                self._stage2_advance_target(
+                    target,
+                    f"机身到达固定门点 base_dist={dist_now:.2f} <= {radius_now:.2f}"
+                )
+                target = self._stage2_current_target()
+                if target is None:
+                    self._run_stage2_exit_to_stage3()
+                    return
+
             aim_x, aim_y = self._stage2_aim_point(target)
+            is_waypoint = target.get("kind") == "waypoint"
             dx = aim_x - ox
             dy = aim_y - oy
             base_dist = math.hypot(dx, dy)
@@ -4167,81 +4879,146 @@ class RaceController:
             head_x = ox + math.cos(oyaw) * STAGE2_HEAD_OFFSET
             head_y = oy + math.sin(oyaw) * STAGE2_HEAD_OFFSET
             head_dist = math.hypot(aim_x - head_x, aim_y - head_y)
-            radius = max(target.get("coord_hit_radius", STAGE2_SIMPLE_REACHED_RADIUS), 0.30)
+            radius = target.get("coord_hit_radius", STAGE2_SIMPLE_REACHED_RADIUS)
+            if not is_waypoint:
+                radius = max(radius, 0.30)
             target_idx = self.stage2_target_idx
-            shaken, moved = self._stage2_ball_shaken(target)
-            if head_dist <= radius or shaken:
+            shaken, moved = self._stage2_ball_shaken(target) if not is_waypoint else (False, 0.0)
+            reached_dist = base_dist if is_waypoint else head_dist
+            line_start = self.stage2_last_coord_point if FORCE_COORD_ONLY else None
+            use_goal_line = (
+                line_start is not None and
+                math.hypot(aim_x - line_start[0], aim_y - line_start[1]) > FORCE_COORD_RADIUS
+            )
+            line_reached = False
+            if use_goal_line:
+                line_dx = aim_x - line_start[0]
+                line_dy = aim_y - line_start[1]
+                line_len = math.hypot(line_dx, line_dy)
+                line_ux = line_dx / line_len
+                line_uy = line_dy / line_len
+                line_progress_left = (aim_x - ox) * line_ux + (aim_y - oy) * line_uy
+                line_lateral_err = (ox - line_start[0]) * (-line_uy) + (oy - line_start[1]) * line_ux
+                line_reached = (
+                    line_progress_left <= FORCE_COORD_RADIUS and
+                    abs(line_lateral_err) <= FORCE_COORD_LINE_HIT_LATERAL
+                )
+            if reached_dist <= radius or shaken:
+                if use_goal_line and not line_reached:
+                    reached_dist = radius + 1.0
+                else:
+                    reason = (
+                        f"橙球位移确认 moved={moved:.3f}"
+                        if shaken else
+                        (
+                            f"机身到达固定门点 base_dist={base_dist:.2f} <= {radius:.2f}"
+                            if is_waypoint else
+                            f"头部到达橙球坐标 head_dist={head_dist:.2f} <= {radius:.2f}"
+                        )
+                    )
+                    self._stage2_advance_target(target, reason)
+                    return
+            if line_reached:
                 reason = (
                     f"橙球位移确认 moved={moved:.3f}"
                     if shaken else
-                    f"头部到达橙球坐标 head_dist={head_dist:.2f} <= {radius:.2f}"
+                    f"沿两点连线到达目标 left={line_progress_left:.2f} lateral={line_lateral_err:.2f}"
                 )
                 self._stage2_advance_target(target, reason)
                 return
 
             if self.stage2_simple_last_target_idx != target_idx:
                 self.stage2_simple_last_target_idx = target_idx
-                self.stage2_simple_last_dist = head_dist
+                self.stage2_simple_last_dist = reached_dist
                 self.stage2_simple_last_progress_time = now
-            elif head_dist < self.stage2_simple_last_dist - STAGE2_SIMPLE_PROGRESS_EPS:
-                self.stage2_simple_last_dist = head_dist
+            elif reached_dist < self.stage2_simple_last_dist - STAGE2_SIMPLE_PROGRESS_EPS:
+                self.stage2_simple_last_dist = reached_dist
                 self.stage2_simple_last_progress_time = now
             stalled = now - self.stage2_simple_last_progress_time >= STAGE2_SIMPLE_STALL_SEC
 
-            turn_only = abs(yaw_err) > STAGE2_SIMPLE_TURN_START_YAW
+            turn_only = (not FORCE_COORD_ONLY) and abs(yaw_err) > STAGE2_SIMPLE_TURN_START_YAW
             if turn_only:
                 steer = max(
-                    -STAGE2_SIMPLE_TURN_STEER_LIMIT,
-                    min(STAGE2_SIMPLE_TURN_STEER_LIMIT, yaw_err * STAGE2_DIRECT_YAW_GAIN)
+                    -FORCE_COORD_YAW_LIMIT,
+                    min(FORCE_COORD_YAW_LIMIT, yaw_err * (1.35 if FORCE_COORD_ONLY else STAGE2_DIRECT_YAW_GAIN))
                 )
                 boundary_text = ""
+                turn_vx = FORCE_COORD_FACE_VX if FORCE_COORD_ONLY else 0.0
                 turn_vy = 0.0
-                if ox > STAGE2_BOUND_X_MAX - STAGE2_BOUND_MARGIN:
+                if (not FORCE_COORD_ONLY) and ox > STAGE2_BOUND_X_MAX - STAGE2_BOUND_MARGIN:
                     _, turn_vy = self._stage2_world_to_body_velocity(
                         -STAGE2_SIMPLE_DRIVE_VY, 0.0, oyaw
                     )
-                    turn_vy = max(-STAGE2_SIMPLE_DRIVE_VY, min(STAGE2_SIMPLE_DRIVE_VY, turn_vy))
+                    if FORCE_COORD_ONLY:
+                        turn_vy = max(-FORCE_COORD_LATERAL_LIMIT, min(FORCE_COORD_LATERAL_LIMIT, turn_vy))
+                    else:
+                        turn_vy = max(-STAGE2_SIMPLE_DRIVE_VY, min(STAGE2_SIMPLE_DRIVE_VY, turn_vy))
                     boundary_text = (
                         f" right_boundary=True bound_x={STAGE2_BOUND_X_MAX:.2f}"
                     )
                 self.log_throttle(
                     "stage2_simple_face_target",
                     0.18,
-                    f"第二赛段先把头部转向橙球坐标，再前进 "
+                    f"第二赛段边转向边推进到{'固定门点' if is_waypoint else '橙球坐标'} "
                     f"target={target_idx + 1}/{len(self.stage2_targets)} "
                     f"goal=({aim_x:.2f},{aim_y:.2f}) odom=({ox:.2f},{oy:.2f}) "
-                    f"head_dist={head_dist:.2f} yaw_err={yaw_err:.2f} steer={steer:.2f}"
+                    f"head_dist={head_dist:.2f} yaw_err={yaw_err:.2f} vx={turn_vx:.2f} steer={steer:.2f}"
                     f"{boundary_text}"
                 )
-                self.apply_locomotion(0.0, turn_vy, steer, gait=STAGE_RUN_GAIT,
+                self.apply_locomotion(turn_vx, turn_vy, steer, gait=STAGE_RUN_GAIT,
                                       step_h=MIN_TRAVEL_STEP_HEIGHT, sensor=sensor_node,
                                       boundary_check=False)
                 return
 
-            speed = min(
-                STAGE2_SIMPLE_DRIVE_VX,
-                max(STAGE2_SIMPLE_MIN_WORLD_SPEED, base_dist * 0.42)
-            )
+            speed = min(STAGE2_SIMPLE_DRIVE_VX, max(STAGE2_SIMPLE_MIN_WORLD_SPEED, base_dist * 0.42))
             if stalled:
                 speed = max(speed, STAGE2_SIMPLE_STALL_VX)
-            if base_dist > 1e-3:
-                world_vx = dx / base_dist * speed
-                world_vy = dy / base_dist * speed
+            if FORCE_COORD_ONLY:
+                line_start = self.stage2_last_coord_point
+                if line_start is not None:
+                    line_dx = aim_x - line_start[0]
+                    line_dy = aim_y - line_start[1]
+                    line_len = max(1e-6, math.hypot(line_dx, line_dy))
+                    line_ux = line_dx / line_len
+                    line_uy = line_dy / line_len
+                    progress_left = (aim_x - ox) * line_ux + (aim_y - oy) * line_uy
+                    lateral_err = (ox - line_start[0]) * (-line_uy) + (oy - line_start[1]) * line_ux
+                    line_text = (
+                        f" line=({line_start[0]:.2f},{line_start[1]:.2f})->({aim_x:.2f},{aim_y:.2f})"
+                        f" left={progress_left:.2f} lateral={lateral_err:.2f}"
+                    )
+                else:
+                    line_text = ""
+                if base_dist > 1e-3 and abs(yaw_err) <= FORCE_COORD_FACE_YAW:
+                    move_vx = min(STAGE2_COORD_NAV_MAX_VX, max(STAGE2_COORD_NAV_MIN_SPEED, speed))
+                else:
+                    move_vx = 0.0
+                move_vy = 0.0
+                world_vx, world_vy = self._body_to_world_velocity(move_vx, move_vy, oyaw)
+                boundary_corrected = False
             else:
-                world_vx = 0.0
-                world_vy = 0.0
-            world_vx, world_vy, boundary_corrected = self._stage2_apply_boundary_guard(world_vx, world_vy)
-            move_vx, move_vy = self._stage2_world_to_body_velocity(world_vx, world_vy, oyaw)
-            move_vx = max(0.0, min(STAGE2_COORD_NAV_MAX_VX, move_vx))
-            if 0.0 < move_vx < STAGE2_COORD_NAV_MIN_SPEED:
-                move_vx = min(STAGE2_COORD_NAV_MAX_VX, STAGE2_COORD_NAV_MIN_SPEED)
-            move_vy = max(-STAGE2_COORD_NAV_MAX_VY, min(STAGE2_COORD_NAV_MAX_VY, move_vy))
+                line_text = ""
+                if base_dist > 1e-3:
+                    world_vx = dx / base_dist * speed
+                    world_vy = dy / base_dist * speed
+                else:
+                    world_vx = 0.0
+                    world_vy = 0.0
+                world_vx, world_vy, boundary_corrected = self._stage2_apply_boundary_guard(world_vx, world_vy)
+                move_vx, move_vy = self._stage2_world_to_body_velocity(world_vx, world_vy, oyaw)
+                if is_waypoint:
+                    move_vx = max(-0.08, min(STAGE2_COORD_NAV_MAX_VX, move_vx))
+                else:
+                    move_vx = max(0.0, min(STAGE2_COORD_NAV_MAX_VX, move_vx))
+                if 0.0 < move_vx < STAGE2_COORD_NAV_MIN_SPEED:
+                    move_vx = min(STAGE2_COORD_NAV_MAX_VX, STAGE2_COORD_NAV_MIN_SPEED)
+                move_vy = max(-STAGE2_COORD_NAV_MAX_VY, min(STAGE2_COORD_NAV_MAX_VY, move_vy))
             steer = max(
                 -STAGE2_SIMPLE_STEER_LIMIT,
                 min(STAGE2_SIMPLE_STEER_LIMIT, yaw_err * 0.32)
             )
             rgb_text = ""
-            if head_dist <= STAGE2_SIMPLE_RGB_ALIGN_DIST:
+            if (not FORCE_COORD_ONLY) and (not is_waypoint) and head_dist <= STAGE2_SIMPLE_RGB_ALIGN_DIST:
                 bgr = image_msg_to_cv(sensor_node.rgb_image_raw)
                 orange_center, orange_area = detect_orange_ball(bgr) if bgr is not None else (None, 0)
                 if orange_center is not None and orange_area >= STAGE2_ORANGE_MIN_AREA:
@@ -4273,15 +5050,17 @@ class RaceController:
                     f" blue_avoid=({bx:.2f},{by:.2f}) "
                     f"front={forward:.2f} lateral={lateral:.2f}"
                 )
+            log_key = "stage2_force_face_coord" if FORCE_COORD_ONLY else "stage2_simple_coord"
+            log_title = "第二赛段强制头向坐标" if FORCE_COORD_ONLY else "第二赛段直线坐标"
             self.log_throttle(
-                "stage2_simple_coord",
+                log_key,
                 0.20,
-                f"第二赛段直线坐标追球 target={target_idx + 1}/{len(self.stage2_targets)} "
+                f"{log_title}{'到门点' if is_waypoint else '追球'} target={target_idx + 1}/{len(self.stage2_targets)} "
                 f"goal=({aim_x:.2f},{aim_y:.2f}) odom=({ox:.2f},{oy:.2f}) "
                 f"head_dist={head_dist:.2f} base_dist={base_dist:.2f} yaw_err={yaw_err:.2f} "
                 f"stalled={stalled} boundary={boundary_corrected} "
                 f"world_v=({world_vx:.2f},{world_vy:.2f}) vx={move_vx:.2f} vy={move_vy:.2f} steer={steer:.2f}"
-                f"{rgb_text}{avoid_text}"
+                f"{line_text}{rgb_text}{avoid_text}"
             )
             self.apply_locomotion(move_vx, move_vy, steer, gait=STAGE_RUN_GAIT,
                                   step_h=MIN_TRAVEL_STEP_HEIGHT, sensor=sensor_node,
@@ -4300,7 +5079,7 @@ class RaceController:
             self.log_throttle(
                 "stage2_first_orange_coord",
                 0.8,
-                f"第二赛段首目标锁定第一个橙球坐标 ({aim_x:.2f},{aim_y:.2f})，"
+                f"第二赛段首目标锁定第一个橙球下方门点 ({aim_x:.2f},{aim_y:.2f})，"
                 f"当前 odom=({ox:.2f},{oy:.2f})"
             )
         _, dist = self._stage2_steer_to_point(aim_x, aim_y)
@@ -4448,122 +5227,23 @@ class RaceController:
         if self._check_fall():
             return
         self._check_stage_timeout(3)
-
-        bgr = image_msg_to_cv(sensor_node.rgb_image_raw)
-        lt = compute_local_target(bgr, stage=3)
-
-        self.local_target_point = lt
-
-        ox, oy, oyaw = self._get_odom_pos()
-
         if self.stage_phase == 0:
             self.stage3_path_idx = 0
             self.stage_phase = 1
             self.phase_start = time.time()
-            self.log("第三赛段启用密集S弯中线门点")
+            self.log("第三赛段启用实测S弯中线折线路线")
             return
-
-        if self.stage_phase == 1:
-            idx = max(0, min(self.stage3_path_idx, len(STAGE3_PATH_POINTS) - 1))
-            label, goal, radius = STAGE3_PATH_POINTS[idx]
-            prev_goal = STAGE2_EXIT_POINT if idx == 0 else STAGE3_PATH_POINTS[idx - 1][1]
-            entry_steer, entry_dist = self._steer_to_map_goal(goal, gain=1.15, limit=0.48)
-            while idx < len(STAGE3_PATH_POINTS) - 1 and sensor_node.odom_got and oy > goal[1] + 0.18:
-                self.stage3_path_idx += 1
-                idx = self.stage3_path_idx
-                label, goal, radius = STAGE3_PATH_POINTS[idx]
-                entry_steer, entry_dist = self._steer_to_map_goal(goal, gain=1.15, limit=0.48)
-                self.log(f"第三赛段已越过旧门点，推进到 {idx + 1}/{len(STAGE3_PATH_POINTS)} {label}")
-            if lt['type'] in ('curve', 'centerline') and lt['conf'] > 0.35:
-                line_steer = lt['target_x'] * 0.45 if lt['type'] == 'curve' else -lt['target_x'] * CENTERLINE_KP
-                line_steer = max(-0.30, min(0.30, line_steer))
-                entry_steer = max(-0.50, min(0.50, entry_steer * 0.45 + line_steer * 0.55))
-
-            self.log_throttle(
-                "stage3_path_gate",
-                1.0,
-                f"第三赛段门点{idx + 1}/{len(STAGE3_PATH_POINTS)} {label} goal=({goal[0]:.2f},{goal[1]:.2f}) "
-                f"dist={entry_dist:.2f} odom=({ox:.2f},{oy:.2f})"
-            )
-            vx = 0.420
-            if lt['type'] == 'curve' and abs(lt['target_x']) > 0.32:
-                vx = 0.320
-            if abs(lt.get('cm_offset', 0.0)) > 7.0:
-                vx = 0.260
-                entry_steer = max(-0.55, min(0.55, -lt['target_x'] * CENTERLINE_KP * 1.6))
-                self.log_throttle(
-                    "stage3_center_recover",
-                    0.35,
-                    f"第三赛段偏离黄线中心 {lt['cm_offset']:.1f}cm，减速回中线"
-                )
-            self.apply_locomotion(vx, 0.0, entry_steer, gait=STAGE_RUN_GAIT,
-                                  step_h=MIN_TRAVEL_STEP_HEIGHT, sensor=sensor_node,
-                                  boundary_check=True, target_point=lt)
-            self._check_stuck()
-            if sensor_node.odom_got and entry_dist < radius:
-                if idx < len(STAGE3_PATH_POINTS) - 1:
-                    self.stage3_path_idx += 1
-                    self.log(f"第三赛段到达{label}，继续门点 {self.stage3_path_idx + 1}/{len(STAGE3_PATH_POINTS)}")
-                else:
-                    self.log("已按S弯中线抵达第三四赛段衔接处")
-                    self._advance_stage(4)
-                self.phase_start = time.time()
-            elif self._time_in_phase() > 60.0:
-                self.log_throttle(
-                    "stage3_path_slow",
-                    3.0,
-                    f"第三赛段仍在寻找{label}，不越黄线兜底切段 dist={entry_dist:.2f}"
-                )
-            return
-
-        map_steer, map_dist = self._steer_to_map_goal(STAGE3_EXIT_POINT, gain=1.05, limit=0.44)
-
-        base_vx = 0.720
-        base_step = HIGH_TRAVEL_STEP_HEIGHT
-
-        if lt['type'] == 'curve' and lt['conf'] > 0.5:
-            steer = lt['target_x'] * 0.70
-            steer = max(-0.52, min(0.52, steer))
-            if sensor_node.odom_got:
-                steer = max(-0.54, min(0.54, steer * 0.70 + map_steer * 0.30))
-            if abs(lt['target_x']) > 0.35:
-                base_vx = 0.560
-                base_step = MIN_TRAVEL_STEP_HEIGHT
-                self.log(f"S弯大曲率 target_x={lt['target_x']:.2f}, 减速到{base_vx}")
-
-            self.apply_locomotion(base_vx, 0.0, steer, gait=STAGE_RUN_GAIT,
-                                  step_h=base_step, sensor=sensor_node,
-                                  boundary_check=True, target_point=lt)
-
-        elif lt['type'] == 'centerline' and lt['conf'] > 0.3:
-            pid_steer = -lt['target_x'] * CENTERLINE_KP
-            pid_steer = max(-0.42, min(0.42, pid_steer))
-            if sensor_node.odom_got:
-                pid_steer = max(-0.48, min(0.48, pid_steer * 0.65 + map_steer * 0.35))
-            self.apply_locomotion(base_vx * 0.92, 0.0, pid_steer, gait=STAGE_RUN_GAIT,
-                                  step_h=base_step, sensor=sensor_node,
-                                  boundary_check=True, target_point=lt)
-        else:
-            self.apply_locomotion(base_vx * 0.92, 0.0, map_steer, gait=STAGE_RUN_GAIT,
-                                  step_h=base_step, sensor=sensor_node,
-                                  boundary_check=True, target_point=lt)
-
-        if lt['cm_offset'] > 8.0:
-            self.log(f"S弯偏移>{lt['cm_offset']:.0f}cm 减速校正")
-            self.apply_locomotion(0.34, 0.0, -lt['target_x'] * CENTERLINE_KP * 1.7,
-                                  gait=STAGE_RUN_GAIT, step_h=MIN_TRAVEL_STEP_HEIGHT,
-                                  sensor=sensor_node, boundary_check=True)
-
-        self._check_stuck()
-        if sensor_node.odom_got and map_dist < 0.55:
-            self.log(f"已通过曲道区域，抵达第三赛段出口 dist={map_dist:.2f}")
-            self._advance_stage(4)
-        elif self._time_in_stage() > 45:
-            self.log_throttle(
-                "stage3_no_timeout_skip",
-                3.0,
-                f"第三赛段行走较久，继续沿S弯出口执行，不按时间跳到第四赛段 dist={map_dist:.2f}"
-            )
+        self._run_force_route(
+            STAGE3_PATH_POINTS,
+            "stage3_path_idx",
+            "第三赛段",
+            next_stage=4,
+            speed=0.30,
+            gait=STAGE_RUN_GAIT,
+            step_h=MIN_TRAVEL_STEP_HEIGHT,
+            body_h=MOBILE_BODY_HEIGHT,
+            allow_lateral=True,
+        )
 
     # ── 第四赛段：深隧寻珍 ──────────────────────────────
 
@@ -4571,6 +5251,62 @@ class RaceController:
         if self._check_fall():
             return
         self._check_stage_timeout(4)
+        if self.stage_phase == 0:
+            self.stage4_force_idx = 0
+            self.stage4_low_prepare_idx = -1
+            self.stage4_low_prepare_until = 0.0
+            self.stage_phase = 1
+            self.phase_start = time.time()
+            self.log("第四赛段启用强制坐标路线，物体识别只保留日志和语音，不抢导航")
+            return
+        stage4_idx = max(0, min(self.stage4_force_idx, len(STAGE4_FORCE_ROUTE_POINTS) - 1))
+        stage4_label, _, _, stage4_options = self._force_route_entry(STAGE4_FORCE_ROUTE_POINTS[stage4_idx])
+        low_clearance = "限高杆" in stage4_label or bool(stage4_options.get("low", False))
+        needs_low_prepare = low_clearance and (
+            "提前低身" in stage4_label or bool(stage4_options.get("prep_low", False))
+        )
+        if needs_low_prepare:
+            now = time.time()
+            if self.stage4_low_prepare_idx != stage4_idx:
+                self.stage4_low_prepare_idx = stage4_idx
+                self.stage4_low_prepare_until = now + STAGE4_LOW_BAR_PREP_SEC
+                self.log(f"第四赛段进入{stage4_label}，先低身稳定再过杆")
+            if now < self.stage4_low_prepare_until:
+                self.send_cmd(MODE_POS_INTERP, 0, duration=260,
+                              pos=[0.0, 0.0, STAGE4_LOW_BODY_HEIGHT],
+                              rpy=[0.0, STAGE4_LOW_PITCH_BIAS, 0.0])
+                self.log_throttle(
+                    "stage4_low_bar_prepare",
+                    0.25,
+                    f"第四赛段限高杆提前低身等待 remain={self.stage4_low_prepare_until - now:.2f}s"
+                )
+                return
+        route_speed = stage4_options.get("speed", STAGE4_LOW_BAR_SPEED if low_clearance else 0.44)
+        route_step_h = STAGE4_LOW_BAR_STEP if low_clearance else MIN_TRAVEL_STEP_HEIGHT
+        active = self._run_force_route(
+            STAGE4_FORCE_ROUTE_POINTS,
+            "stage4_force_idx",
+            "第四赛段",
+            next_stage=5,
+            speed=route_speed,
+            gait=STAGE_RUN_GAIT,
+            step_h=route_step_h,
+            body_h=STAGE4_LOW_BODY_HEIGHT if low_clearance else MOBILE_BODY_HEIGHT,
+            pitch_bias=STAGE4_LOW_PITCH_BIAS if low_clearance else MOBILE_PITCH_BIAS,
+            allow_lateral=True,
+        )
+        if active:
+            idx = max(0, min(self.stage4_force_idx, len(STAGE4_FORCE_ROUTE_POINTS) - 1))
+            label = STAGE4_FORCE_ROUTE_POINTS[idx][0]
+            if "限高杆" in label:
+                self.speak_once("stage4_low_bar", "限高杆")
+            elif "可乐瓶点" in label:
+                self.speak_once("stage4_coke", "可乐瓶")
+            elif "橙球点" in label:
+                self.speak_once("stage4_orange_ball", "橙色球")
+            elif "足球点" in label:
+                self.speak_once("stage4_football", "足球")
+        return
 
         bgr = image_msg_to_cv(sensor_node.rgb_image_raw)
         red_center, red_area = detect_red_object(bgr) if bgr is not None else (None, 0)
@@ -4761,6 +5497,50 @@ class RaceController:
         if self._check_fall():
             return
         self._check_stage_timeout(5)
+        bridge_route = STAGE5_FORCE_ROUTE_POINTS[:-1]
+        if self.stage_phase == 0:
+            self.stage5_force_idx = 0
+            self.stage_phase = 1
+            self.phase_start = time.time()
+            self.log("第五赛段启用强制桥中心线坐标路线，到末端前50cm主动跳下")
+            self.send_cmd(MODE_POS_INTERP, 0, duration=450,
+                          pos=[0.0, 0.0, LOW_BODY_HEIGHT], rpy=[0.0, 0.0, 0.0])
+            return
+        if self.stage_phase == 1:
+            active = self._run_force_route(
+                bridge_route,
+                "stage5_force_idx",
+                "第五赛段",
+                next_stage=None,
+                speed=0.22,
+                gait=GAIT_TROT_SLOW,
+                step_h=STAIR_SAFE_STEP_HEIGHT,
+                body_h=LOW_BODY_HEIGHT,
+                pitch_bias=STAIR_SAFE_PITCH_BIAS,
+            )
+            if active:
+                return
+            self.log("第五赛段已到独木桥末端前50cm，立即执行跳下")
+            self.stage_phase = 2
+            self.phase_start = time.time()
+            return
+        if self.stage_phase == 2:
+            self.send_cmd(MODE_JUMP3D, JUMP_DOWN_STAIR, duration=1200)
+            self.stage5_jump_time = time.time()
+            self.stage5_jump_resume_sent = False
+            self.stage_phase = 3
+            self.phase_start = time.time()
+            return
+        if self.stage_phase == 3:
+            elapsed = time.time() - self.stage5_jump_time
+            if elapsed < 1.20:
+                self.log_throttle("stage5_jump_force_wait", 0.35, f"独木桥跳下动作执行中 elapsed={elapsed:.2f}")
+                return
+            self.send_cmd(MODE_RECOVERY_STAND, 0, step_h=0.0)
+            if elapsed > 1.80:
+                self.log("第五赛段跳下后恢复完成，立即进入第六赛段")
+                self._advance_stage(6)
+            return
 
         if self.stage_phase == 0:
             self.log("阶段0: 接近独木桥，降低身体")
@@ -4943,6 +5723,55 @@ class RaceController:
         if self._check_fall():
             return
         self._check_stage_timeout(6)
+        if self.stage_phase == 0:
+            self.stage6_force_idx = 0
+            self.stage_phase = 1
+            self.phase_start = time.time()
+            self.log("第六赛段启用稳定点、足球点、踢球后回中点、PDF终点圈强制路线")
+            return
+        if self.stage_phase == 1:
+            active = self._run_force_route(
+                STAGE6_FORCE_ROUTE_POINTS[:2],
+                "stage6_force_idx",
+                "第六赛段足球",
+                next_stage=None,
+                speed=0.34,
+                gait=GAIT_TROT_SLOW,
+                step_h=HIGH_TRAVEL_STEP_HEIGHT,
+                body_h=MOBILE_BODY_HEIGHT,
+            )
+            if active:
+                return
+            self.log("第六赛段到达足球点，沿进球出口方向直接踢球")
+            self.send_cmd(MODE_LOCOMOTION, GAIT_TROT_SLOW, vx=1.20, vy=0.0,
+                          vyaw=0.0, step_h=0.12, duration=520)
+            self.stage_phase = 2
+            self.phase_start = time.time()
+            return
+        if self.stage_phase == 2:
+            if self._time_in_phase() < 0.70:
+                return
+            self.stage6_force_idx = 2
+            self.stage_phase = 3
+            self.phase_start = time.time()
+            return
+        if self.stage_phase == 3:
+            active = self._run_force_route(
+                STAGE6_FORCE_ROUTE_POINTS,
+                "stage6_force_idx",
+                "第六赛段终点",
+                next_stage=None,
+                speed=0.34,
+                gait=GAIT_TROT_SLOW,
+                step_h=MIN_TRAVEL_STEP_HEIGHT,
+                body_h=MOBILE_BODY_HEIGHT,
+            )
+            if active:
+                return
+            self.log("第六赛段已到终点，趴下完成比赛")
+            self.send_cmd(MODE_PURE_DAMPER, 0, step_h=0.0)
+            self._advance_stage(7)
+            return
 
         if self.stage_phase == 0:
             self.log("阶段0: 恢复站立，视觉寻找足球")

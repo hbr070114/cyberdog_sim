@@ -1,2 +1,2 @@
 #!/bin/bash
-git push origin master
+GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no" git push origin master

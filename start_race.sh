@@ -12,8 +12,8 @@ cd "$WS_ROOT" || { echo "FATAL: cannot cd to $WS_ROOT"; exit 1; }
 echo "[$(date +%H:%M:%S)] Workspace: $WS_ROOT"
 
 export DISPLAY=${DISPLAY:-:0}
-export GAZEBO_GUI=true
-export GAZEBO_HEADLESS=false
+export GAZEBO_GUI=${GAZEBO_GUI:-true}
+export GAZEBO_HEADLESS=${GAZEBO_HEADLESS:-false}
 
 source /opt/ros/galactic/setup.bash 2>/dev/null
 source install/setup.bash 2>/dev/null
@@ -42,6 +42,31 @@ if ! command -v ros2 >/dev/null 2>&1; then
             -e LIBGL_ALWAYS_SOFTWARE="${RACE_SOFTWARE_GL:-0}" \
             -e GAZEBO_HEADLESS="${GAZEBO_HEADLESS:-false}" \
             -e GAZEBO_GUI="${GAZEBO_GUI:-true}" \
+            -e RACE_FORCE_COORD_ONLY="${RACE_FORCE_COORD_ONLY:-}" \
+            -e RACE_FORCE_COORD_RADIUS="${RACE_FORCE_COORD_RADIUS:-}" \
+            -e RACE_FORCE_COORD_VX="${RACE_FORCE_COORD_VX:-}" \
+            -e RACE_FORCE_COORD_VY="${RACE_FORCE_COORD_VY:-}" \
+            -e RACE_FORCE_COORD_YAW_LIMIT="${RACE_FORCE_COORD_YAW_LIMIT:-}" \
+            -e RACE_FORCE_COORD_FACE_YAW="${RACE_FORCE_COORD_FACE_YAW:-}" \
+            -e RACE_FORCE_COORD_FACE_VX="${RACE_FORCE_COORD_FACE_VX:-}" \
+            -e RACE_FORCE_COORD_SLOW_RADIUS="${RACE_FORCE_COORD_SLOW_RADIUS:-}" \
+            -e RACE_FORCE_COORD_MIN_DRIVE_VX="${RACE_FORCE_COORD_MIN_DRIVE_VX:-}" \
+            -e RACE_FORCE_COORD_LINE_HIT_LATERAL="${RACE_FORCE_COORD_LINE_HIT_LATERAL:-}" \
+            -e RACE_FORCE_ROUTE_YAW_GAIN="${RACE_FORCE_ROUTE_YAW_GAIN:-}" \
+            -e RACE_FORCE_ROUTE_LATERAL_GAIN="${RACE_FORCE_ROUTE_LATERAL_GAIN:-}" \
+            -e RACE_FORCE_ROUTE_LATERAL_LIMIT="${RACE_FORCE_ROUTE_LATERAL_LIMIT:-}" \
+            -e RACE_FORCE_ROUTE_SLOW_RADIUS="${RACE_FORCE_ROUTE_SLOW_RADIUS:-}" \
+            -e RACE_FORCE_ROUTE_MIN_VX="${RACE_FORCE_ROUTE_MIN_VX:-}" \
+            -e RACE_FORCE_ROUTE_RADIUS="${RACE_FORCE_ROUTE_RADIUS:-}" \
+            -e RACE_FORCE_ROUTE_OVERSHOOT_LATERAL="${RACE_FORCE_ROUTE_OVERSHOOT_LATERAL:-}" \
+            -e RACE_FORCE_STAGE1_X_RADIUS="${RACE_FORCE_STAGE1_X_RADIUS:-}" \
+            -e RACE_FORCE_STAGE1_X_DRIVE_VX="${RACE_FORCE_STAGE1_X_DRIVE_VX:-}" \
+            -e RACE_FORCE_STAGE1_X_SLOW_VX="${RACE_FORCE_STAGE1_X_SLOW_VX:-}" \
+            -e RACE_FORCE_STAGE1_Y_DRIVE_VX="${RACE_FORCE_STAGE1_Y_DRIVE_VX:-}" \
+            -e RACE_FORCE_STAGE1_Y_SLOW_VX="${RACE_FORCE_STAGE1_Y_SLOW_VX:-}" \
+            -e RACE_FORCE_STAGE1_Y_RADIUS="${RACE_FORCE_STAGE1_Y_RADIUS:-}" \
+            -e RACE_FORCE_COORD_STAGE1_STONE_VY_GAIN="${RACE_FORCE_COORD_STAGE1_STONE_VY_GAIN:-}" \
+            -e RACE_FORCE_COORD_STAGE1_STONE_VY_LIMIT="${RACE_FORCE_COORD_STAGE1_STONE_VY_LIMIT:-}" \
             -e RACE_STONE_GAIT="${RACE_STONE_GAIT:-}" \
             -e RACE_STONE_HIGH_GAIT="${RACE_STONE_HIGH_GAIT:-}" \
             -e RACE_STONE_CRAWL_VX="${RACE_STONE_CRAWL_VX:-}" \
@@ -159,6 +184,7 @@ if ! command -v ros2 >/dev/null 2>&1; then
             -e RACE_STAGE2_ORANGE_MIN_AREA="${RACE_STAGE2_ORANGE_MIN_AREA:-}" \
             -e RACE_STAGE2_ORANGE_CENTER_X="${RACE_STAGE2_ORANGE_CENTER_X:-}" \
             -e RACE_STAGE2_ORANGE_HIT_AREA="${RACE_STAGE2_ORANGE_HIT_AREA:-}" \
+            -e RACE_STAGE2_FORCE_ORANGE_RADIUS="${RACE_STAGE2_FORCE_ORANGE_RADIUS:-}" \
             -e RACE_STAGE2_ROUTE_RADIUS="${RACE_STAGE2_ROUTE_RADIUS:-}" \
             -e RACE_STAGE2_ROUTE_TIMEOUT="${RACE_STAGE2_ROUTE_TIMEOUT:-}" \
             -e RACE_STAGE2_ROUTE_VX="${RACE_STAGE2_ROUTE_VX:-}" \
@@ -188,6 +214,10 @@ if ! command -v ros2 >/dev/null 2>&1; then
             -e RACE_STAGE2_INPLACE_TURN_YAW="${RACE_STAGE2_INPLACE_TURN_YAW:-}" \
             -e RACE_STAGE2_INPLACE_TURN_DONE_YAW="${RACE_STAGE2_INPLACE_TURN_DONE_YAW:-}" \
             -e RACE_STAGE2_INPLACE_TURN_RATE="${RACE_STAGE2_INPLACE_TURN_RATE:-}" \
+            -e RACE_STAGE4_LOW_BODY_H="${RACE_STAGE4_LOW_BODY_H:-}" \
+            -e RACE_STAGE4_LOW_BAR_VX="${RACE_STAGE4_LOW_BAR_VX:-}" \
+            -e RACE_STAGE4_LOW_BAR_STEP="${RACE_STAGE4_LOW_BAR_STEP:-}" \
+            -e RACE_STAGE4_LOW_BAR_PREP_SEC="${RACE_STAGE4_LOW_BAR_PREP_SEC:-}" \
             -e __GL_SYNC_TO_VBLANK=0 \
             -e vblank_mode=0 \
             cyberdog_slam bash -lc "cd /home/cyberdog_sim && bash start_race.sh"
@@ -215,11 +245,15 @@ cleanup_sim_processes() {
     pkill -TERM -f "gzclient" 2>/dev/null || true
     pkill -TERM -f "cyberdog_visual" 2>/dev/null || true
     pkill -TERM -f "cyberdog_control" 2>/dev/null || true
+    pkill -TERM -f "robot_state_publisher" 2>/dev/null || true
+    pkill -TERM -f "motion_manager" 2>/dev/null || true
+    pkill -TERM -f "keybroad_commander" 2>/dev/null || true
     sleep "${CLEAN_SLEEP:-1}"
     pkill -9 -f "ros2 launch cyberdog_gazebo race_gazebo.launch.py" 2>/dev/null || true
     pkill -9 -f "ros2 launch cyberdog_visual cyberdog_visual.launch.py" 2>/dev/null || true
     pkill -9 -f "race_controller/race_controller.py" 2>/dev/null || true
-    killall -9 gzserver gzclient cyberdog_control cyberdog_visual 2>/dev/null || true
+    killall -9 gzserver gzclient cyberdog_control cyberdog_visual robot_state_publisher motion_manager 2>/dev/null || true
+    pkill -9 -f "keybroad_commander" 2>/dev/null || true
     rm -f /dev/shm/development-simulator /dev/shm/sem.* 2>/dev/null || true
 }
 
